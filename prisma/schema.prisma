@@ -1,0 +1,154 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  name         String
+  role         String   @default("ADMIN")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Project {
+  id          String         @id @default(uuid())
+  title       String
+  slug        String         @unique
+  category    String         // Industrial, Architecture, Government, Corporate, Institutional, Infrastructure
+  location    String
+  area        String?
+  client      String?
+  year        String?
+  shortDesc   String
+  fullDesc    String
+  scopeOfWork String?        // JSON string or newline list
+  coverImage  String
+  isFeatured  Boolean        @default(false)
+  isPublished Boolean        @default(true)
+  seoTitle    String?
+  seoDesc     String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  images      ProjectImage[]
+}
+
+model ProjectImage {
+  id        String   @id @default(uuid())
+  projectId String
+  project   Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  url       String
+  caption   String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Service {
+  id          String   @id @default(uuid())
+  number      String   // e.g. "01", "02"
+  title       String
+  icon        String   // Icon identifier name
+  image       String
+  shortDesc   String
+  fullDesc    String
+  features    String   // JSON formatted array string
+  isPublished Boolean  @default(true)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Job {
+  id               String           @id @default(uuid())
+  title            String
+  department       String
+  location         String           @default("Pune, India")
+  experience       String           // e.g., "3-5 years"
+  type             String           @default("Full-time")
+  description      String
+  requirements     String           // JSON or newline list
+  responsibilities String           // JSON or newline list
+  isPublished      Boolean          @default(true)
+  createdAt        DateTime         @default(now())
+  updatedAt        DateTime         @updatedAt
+  applications     JobApplication[]
+}
+
+model JobApplication {
+  id           String   @id @default(uuid())
+  jobId        String?
+  job          Job?     @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  position     String
+  name         String
+  email        String
+  phone        String
+  resumeUrl    String?
+  coverMessage String?
+  status       String   @default("New") // New, Shortlisted, Interview, Rejected, Selected
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model ContactInquiry {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  phone     String
+  company   String?
+  subject   String
+  message   String
+  status    String   @default("New") // New, Read, In Progress, Resolved, Archived
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(uuid())
+  name      String
+  url       String
+  size      Int      @default(0)
+  mimeType  String   @default("image/jpeg")
+  createdAt DateTime @default(now())
+}
+
+model WebsiteSetting {
+  id        String   @id @default(uuid())
+  key       String   @unique
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  action    String
+  user      String
+  module    String
+  details   String?
+  createdAt DateTime @default(now())
+}
+
+model TeamMember {
+  id        String   @id @default(uuid())
+  name      String
+  role      String
+  bio       String?
+  image     String?
+  sortOrder Int      @default(0)
+  createdAt DateTime @default(now())
+}
+
+model Testimonial {
+  id          String   @id @default(uuid())
+  clientName  String
+  company     String
+  content     String
+  rating      Int      @default(5)
+  isPublished Boolean  @default(true)
+  createdAt   DateTime @default(now())
+}
