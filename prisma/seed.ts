@@ -1,11 +1,93 @@
 import { PrismaClient } from '@prisma/client';
 import bcrypt from 'bcryptjs';
+import fs from 'fs';
+import path from 'path';
 
 const prisma = new PrismaClient();
 
 async function main() {
   console.log('Seeding database with Korals Design Pvt Ltd data...');
 
+  const exportedDataPath = path.join(process.cwd(), 'prisma', 'exported_data.json');
+
+  if (fs.existsSync(exportedDataPath)) {
+    console.log('Found exported_data.json! Restoring database state...');
+    const raw = fs.readFileSync(exportedDataPath, 'utf-8');
+    const data = JSON.parse(raw);
+
+    // Clear existing data in correct dependency order
+    await prisma.activityLog.deleteMany();
+    await prisma.testimonial.deleteMany();
+    await prisma.teamMember.deleteMany();
+    await prisma.media.deleteMany();
+    await prisma.contactInquiry.deleteMany();
+    await prisma.jobApplication.deleteMany();
+    await prisma.job.deleteMany();
+    await prisma.service.deleteMany();
+    await prisma.projectImage.deleteMany();
+    await prisma.project.deleteMany();
+    await prisma.websiteSetting.deleteMany();
+    await prisma.user.deleteMany();
+
+    // 1. Users
+    for (const u of data.users || []) {
+      await prisma.user.create({ data: u });
+    }
+
+    // 2. Settings
+    for (const s of data.websiteSettings || []) {
+      await prisma.websiteSetting.create({ data: s });
+    }
+
+    // 3. Services
+    for (const s of data.services || []) {
+      await prisma.service.create({ data: s });
+    }
+
+    // 4. Projects & Images
+    for (const p of data.projects || []) {
+      const { images, ...projectData } = p;
+      const createdProject = await prisma.project.create({ data: projectData });
+      if (images && images.length > 0) {
+        for (const img of images) {
+          const { id, projectId, ...imgData } = img;
+          await prisma.projectImage.create({
+            data: { ...imgData, projectId: createdProject.id },
+          });
+        }
+      }
+    }
+
+    // 5. Jobs & Applications
+    for (const j of data.jobs || []) {
+      await prisma.job.create({ data: j });
+    }
+    for (const ja of data.jobApplications || []) {
+      await prisma.jobApplication.create({ data: ja });
+    }
+
+    // 6. Contact Inquiries, Media, Team, Testimonials, Logs
+    for (const c of data.contactInquiries || []) {
+      await prisma.contactInquiry.create({ data: c });
+    }
+    for (const m of data.media || []) {
+      await prisma.media.create({ data: m });
+    }
+    for (const t of data.teamMembers || []) {
+      await prisma.teamMember.create({ data: t });
+    }
+    for (const tm of data.testimonials || []) {
+      await prisma.testimonial.create({ data: tm });
+    }
+    for (const al of data.activityLogs || []) {
+      await prisma.activityLog.create({ data: al });
+    }
+
+    console.log('Restored all records from exported_data.json successfully!');
+    return;
+  }
+
+  // Fallback to default seed if no exported_data.json exists
   // 1. Create Default Admin
   const existingAdmin = await prisma.user.findUnique({
     where: { email: 'admin@koralsdesign.com' },
@@ -52,7 +134,7 @@ async function main() {
     await prisma.websiteSetting.create({ data: setting });
   }
 
-  // 4. Team Members (Leadership)
+  // 4. Team Members
   await prisma.teamMember.createMany({
     data: [
       {
@@ -164,7 +246,7 @@ async function main() {
   }
 
   // 6. Verified Projects
-  const alfaLaval = await prisma.project.create({
+  await prisma.project.create({
     data: {
       title: 'ALFA LAVAL',
       slug: 'alfa-laval',
@@ -174,7 +256,7 @@ async function main() {
       client: 'Alfa Laval India Pvt Ltd',
       year: '2021',
       shortDesc: 'State-of-the-art industrial manufacturing & engineering facility expansion located in Kasarwadi, Bhosari, Pune.',
-      fullDesc: 'Korals Design Pvt Ltd provided complete architectural planning, structural coordination, technical liaisoning, and sanction approvals for the expansion of Alfa Laval\'s industrial manufacturing facility in Kasarwadi, Bhosari, Pune. The project encompassed heavy industrial plant layouts, specialized foundation design, administrative offices, and statutory clearances under MIDC and MPCB norms.',
+      fullDesc: 'Korals Design Pvt Ltd provided complete architectural planning, structural coordination, technical liaisoning, and sanction approvals for the expansion of Alfa Laval\'s industrial manufacturing facility in Kasarwadi, Bhosari, Pune.',
       scopeOfWork: JSON.stringify([
         'Architectural Master Planning & Layout',
         'Structural Engineering Coordination',
@@ -197,7 +279,7 @@ async function main() {
     },
   });
 
-  const suzlon = await prisma.project.create({
+  await prisma.project.create({
     data: {
       title: 'SUZLON ENERGY INDUSTRIAL PARK',
       slug: 'suzlon',
@@ -207,7 +289,7 @@ async function main() {
       client: 'Suzlon Energy Ltd',
       year: '2022',
       shortDesc: 'Renewable energy equipment manufacturing complex completed months ahead of scheduled deadline.',
-      fullDesc: 'A flagship renewable energy industrial park project undertaken for Suzlon Energy Ltd. Korals Design delivered comprehensive land survey, earthwork quantity calculations, civil project management, and statutory liaisoning. Through expedited technical coordination and precision scheduling, the project was successfully completed months ahead of schedule.',
+      fullDesc: 'A flagship renewable energy industrial park project undertaken for Suzlon Energy Ltd. Korals Design delivered comprehensive land survey, earthwork quantity calculations, civil project management, and statutory liaisoning.',
       scopeOfWork: JSON.stringify([
         'DGPS & Topographic Land Surveying',
         'Cutting & Filling Quantity Calculations',
@@ -229,7 +311,7 @@ async function main() {
     },
   });
 
-  const shrirampur = await prisma.project.create({
+  await prisma.project.create({
     data: {
       title: 'SHRIRAMPUR MUNICIPAL CORPORATION',
       slug: 'shrirampur-municipal-corporation',
@@ -239,7 +321,7 @@ async function main() {
       client: 'Shrirampur Municipal Corporation',
       year: '2020',
       shortDesc: 'Civic infrastructure master planning, municipal office layout design, and revenue land survey.',
-      fullDesc: 'Korals Design was commissioned by Shrirampur Municipal Corporation for complete civic space planning, land revenue survey, contour analysis, and institutional architectural layouts. The project created a streamlined administrative complex for municipal governance and public service delivery.',
+      fullDesc: 'Korals Design was commissioned by Shrirampur Municipal Corporation for complete civic space planning, land revenue survey, contour analysis, and institutional architectural layouts.',
       scopeOfWork: JSON.stringify([
         'Contour Survey & Topographic Mapping',
         'Civic Administrative Complex Architecture',
@@ -261,7 +343,7 @@ async function main() {
     },
   });
 
-  const pmrdaComplex = await prisma.project.create({
+  await prisma.project.create({
     data: {
       title: 'PMRDA LOGISTICS & INDUSTRIAL HUB',
       slug: 'pmrda-logistics-hub',
@@ -271,7 +353,7 @@ async function main() {
       client: 'PMRDA & Industrial Partners',
       year: '2023',
       shortDesc: 'Integrated logistics park master planning and multi-tenant warehouse architectural design.',
-      fullDesc: 'A major infrastructure and logistics hub planned within the PMRDA region near Chakan. Korals Design delivered comprehensive GPR underground utility scanning, environmental permissions, building plan sanctions, and project management consultancy.',
+      fullDesc: 'A major infrastructure and logistics hub planned within the PMRDA region near Chakan.',
       scopeOfWork: JSON.stringify([
         'Master Logistics Park Layout',
         'Underground Utility Scanning (GPR)',
@@ -289,85 +371,6 @@ async function main() {
           { url: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200', caption: 'Logistics Terminal Overview', sortOrder: 1 },
         ],
       },
-    },
-  });
-
-  // 7. Careers Data
-  await prisma.job.createMany({
-    data: [
-      {
-        title: 'Senior Architectural Designer',
-        department: 'Architectural Planning',
-        location: 'Pune, Maharashtra',
-        experience: '5-8 Years',
-        type: 'Full-time',
-        description: 'We are seeking an experienced Architectural Designer to lead industrial and corporate master planning projects.',
-        requirements: JSON.stringify([
-          'B.Arch or M.Arch from a recognized university',
-          'Proficiency in AutoCAD, Revit, SketchUp, and BIM workflows',
-          'Deep familiarity with MIDC, PMRDA, and PMC building bylaws',
-          'Experience in industrial layout and structural coordination'
-        ]),
-        responsibilities: JSON.stringify([
-          'Develop architectural concepts and working drawings',
-          'Coordinate with structural engineers, MEP consultants, and clients',
-          'Prepare sanction drawing sets for statutory approvals',
-          'Conduct periodic site visits for execution compliance'
-        ]),
-      },
-      {
-        title: 'Civil Engineer — Project Management (PMC)',
-        department: 'Project Management',
-        location: 'Pune / Site Locations',
-        experience: '3-6 Years',
-        type: 'Full-time',
-        description: 'Responsible for on-site construction monitoring, BOQ verification, invoice certification, and quality assurance.',
-        requirements: JSON.stringify([
-          'B.E. / B.Tech in Civil Engineering',
-          'Proven experience in PMC or site execution for industrial buildings',
-          'Strong knowledge of materials testing, IS codes, and safety standards',
-          'Excellent vendor management and reporting skills'
-        ]),
-        responsibilities: JSON.stringify([
-          'Monitor day-to-day construction activities against schedules',
-          'Perform quality control audits and sample testing',
-          'Verify contractor billing and issue monthly invoice certifications',
-          'Maintain daily site logs and safety compliance records'
-        ]),
-      },
-      {
-        title: 'Technical Liaison & Approval Executive',
-        department: 'Government Permissions',
-        location: 'Pune, Maharashtra',
-        experience: '2-5 Years',
-        type: 'Full-time',
-        description: 'Coordinate statutory clearances and follow-up with government authorities including MPCB, MIDC, DISH, and PMRDA.',
-        requirements: JSON.stringify([
-          'Degree/Diploma in Architecture or Civil Engineering',
-          'Proven record of filing and tracking statutory clearance files',
-          'In-depth knowledge of Maharashtra land revenue & building regulations',
-          'Fluency in Marathi, English, and Hindi'
-        ]),
-        responsibilities: JSON.stringify([
-          'Prepare and submit sanction documentation to relevant authorities',
-          'Liaise with officers at MPCB, MIDC, DISH, DSLR, PMRDA, and PMC',
-          'Track status of NOCs and building permits',
-          'Guide clients on regulatory compliance requirements'
-        ]),
-      }
-    ],
-  });
-
-  // 8. Sample Contact Inquiry
-  await prisma.contactInquiry.create({
-    data: {
-      name: 'Rajesh Sharma',
-      email: 'r.sharma@maharashtra-ind.com',
-      phone: '+91 9876543210',
-      company: 'Maharashtra Industrial Components Ltd',
-      subject: 'Inquiry for MIDC Land Survey & Building Plan Approval',
-      message: 'We have acquired a 5-acre plot in Chakan Phase 2 and require topographic survey, GPR scanning, and MIDC building plan sanction services. Please share a project consultation proposal.',
-      status: 'New',
     },
   });
 

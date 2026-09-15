@@ -1,0 +1,393 @@
+{
+  "users": [
+    {
+      "id": "edc25576-9b7c-4b16-bc49-88f6209b9d31",
+      "email": "admin@koralsdesign.com",
+      "passwordHash": "$2a$10$Jai2darA0U463QhooTqz8OK2Z.3RYT2keGy/lX0cNaspuO8Tn5/36",
+      "name": "Administrator",
+      "role": "ADMIN",
+      "createdAt": "2026-09-15T11:18:33.194Z",
+      "updatedAt": "2026-09-15T11:18:33.194Z"
+    }
+  ],
+  "projects": [
+    {
+      "id": "86c63525-0e09-4bb6-b3c0-afddd6a96643",
+      "title": "ALFA LAVAL",
+      "slug": "alfa-laval",
+      "category": "Industrial",
+      "location": "Kasarwadi, Bhosari, Pune",
+      "area": "12,274 Sq.M.",
+      "client": "Alfa Laval India Pvt Ltd",
+      "year": "2021",
+      "shortDesc": "State-of-the-art industrial manufacturing & engineering facility expansion located in Kasarwadi, Bhosari, Pune.",
+      "fullDesc": "Korals Design Pvt Ltd provided complete architectural planning, structural coordination, technical liaisoning, and sanction approvals for the expansion of Alfa Laval's industrial manufacturing facility in Kasarwadi, Bhosari, Pune. The project encompassed heavy industrial plant layouts, specialized foundation design, administrative offices, and statutory clearances under MIDC and MPCB norms.",
+      "scopeOfWork": "[\"Architectural Master Planning & Layout\",\"Structural Engineering Coordination\",\"MIDC Building Plan Sanction & Approvals\",\"MPCB Environmental Clearances\",\"Construction Management & Technical Liaisoning\"]",
+      "coverImage": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1200",
+      "isFeatured": true,
+      "isPublished": true,
+      "seoTitle": "Alfa Laval Industrial Building | Korals Design Projects",
+      "seoDesc": "Architectural planning, sanction approvals, and execution management for Alfa Laval industrial facility in Kasarwadi, Bhosari, Pune.",
+      "createdAt": "2026-09-15T11:18:33.466Z",
+      "updatedAt": "2026-09-15T11:18:33.466Z",
+      "images": [
+        {
+          "id": "13e72989-2760-4618-8043-428b19850545",
+          "projectId": "86c63525-0e09-4bb6-b3c0-afddd6a96643",
+          "url": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&q=80&w=1200",
+          "caption": "Industrial Facility Frontage",
+          "sortOrder": 1,
+          "createdAt": "2026-09-15T11:18:33.466Z"
+        },
+        {
+          "id": "a6f5d11a-d19a-4e39-86bc-bf7ef6ec71e7",
+          "projectId": "86c63525-0e09-4bb6-b3c0-afddd6a96643",
+          "url": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1200",
+          "caption": "Heavy Manufacturing Floor Layout",
+          "sortOrder": 2,
+          "createdAt": "2026-09-15T11:18:33.466Z"
+        },
+        {
+          "id": "9379631b-34c3-4b5a-84e5-6b2703809884",
+          "projectId": "86c63525-0e09-4bb6-b3c0-afddd6a96643",
+          "url": "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&q=80&w=1200",
+          "caption": "Structural Framework & Crane Girders",
+          "sortOrder": 3,
+          "createdAt": "2026-09-15T11:18:33.466Z"
+        }
+      ]
+    },
+    {
+      "id": "e6cc72a6-2274-4f30-90c8-e0cfe5a4f01d",
+      "title": "SUZLON ENERGY INDUSTRIAL PARK",
+      "slug": "suzlon",
+      "category": "Industrial",
+      "location": "Pune, Maharashtra",
+      "area": "18,500 Sq.M.",
+      "client": "Suzlon Energy Ltd",
+      "year": "2022",
+      "shortDesc": "Renewable energy equipment manufacturing complex completed months ahead of scheduled deadline.",
+      "fullDesc": "A flagship renewable energy industrial park project undertaken for Suzlon Energy Ltd. Korals Design delivered comprehensive land survey, earthwork quantity calculations, civil project management, and statutory liaisoning. Through expedited technical coordination and precision scheduling, the project was successfully completed months ahead of schedule.",
+      "scopeOfWork": "[\"DGPS & Topographic Land Surveying\",\"Cutting & Filling Quantity Calculations\",\"Government Mojani & Revenue Approvals\",\"Project Management Consultancy (PMC)\",\"Fast-track Civil Execution Oversight\"]",
+      "coverImage": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=1200",
+      "isFeatured": true,
+      "isPublished": true,
+      "seoTitle": "Suzlon Energy Industrial Park | Korals Design Projects",
+      "seoDesc": "Industrial planning and project management consultancy for Suzlon Energy Ltd completed months ahead of schedule.",
+      "createdAt": "2026-09-15T11:18:33.478Z",
+      "updatedAt": "2026-09-15T11:18:33.478Z",
+      "images": [
+        {
+          "id": "4e566d9e-9500-4f5d-b9e4-0538376416fe",
+          "projectId": "e6cc72a6-2274-4f30-90c8-e0cfe5a4f01d",
+          "url": "https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&q=80&w=1200",
+          "caption": "Suzlon Renewable Technology Complex",
+          "sortOrder": 1,
+          "createdAt": "2026-09-15T11:18:33.478Z"
+        },
+        {
+          "id": "7ad26465-bdcd-43aa-a629-7025d6f4b440",
+          "projectId": "e6cc72a6-2274-4f30-90c8-e0cfe5a4f01d",
+          "url": "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&q=80&w=1200",
+          "caption": "Corporate & Engineering Annex",
+          "sortOrder": 2,
+          "createdAt": "2026-09-15T11:18:33.478Z"
+        }
+      ]
+    },
+    {
+      "id": "1a57b0f8-879b-436a-9b83-de86b7edfc3d",
+      "title": "SHRIRAMPUR MUNICIPAL CORPORATION",
+      "slug": "shrirampur-municipal-corporation",
+      "category": "Government",
+      "location": "Shrirampur, Maharashtra",
+      "area": "25,000 Sq.M.",
+      "client": "Shrirampur Municipal Corporation",
+      "year": "2020",
+      "shortDesc": "Civic infrastructure master planning, municipal office layout design, and revenue land survey.",
+      "fullDesc": "Korals Design was commissioned by Shrirampur Municipal Corporation for complete civic space planning, land revenue survey, contour analysis, and institutional architectural layouts. The project created a streamlined administrative complex for municipal governance and public service delivery.",
+      "scopeOfWork": "[\"Contour Survey & Topographic Mapping\",\"Civic Administrative Complex Architecture\",\"Town Planning Liaisoning & DSLR Clearances\",\"Utility Infrastructure Mapping\",\"Third-Party Construction Supervision\"]",
+      "coverImage": "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&q=80&w=1200",
+      "isFeatured": true,
+      "isPublished": true,
+      "seoTitle": "Shrirampur Municipal Corporation Project | Korals Design",
+      "seoDesc": "Civic infrastructure planning and architectural design for Shrirampur Municipal Corporation by Korals Design Pvt Ltd.",
+      "createdAt": "2026-09-15T11:18:33.493Z",
+      "updatedAt": "2026-09-15T11:18:33.493Z",
+      "images": [
+        {
+          "id": "4100dedd-86a2-4ee8-91cb-fb6dcd0f8192",
+          "projectId": "1a57b0f8-879b-436a-9b83-de86b7edfc3d",
+          "url": "https://images.unsplash.com/photo-1577495508048-b635879837f1?auto=format&fit=crop&q=80&w=1200",
+          "caption": "Municipal Administrative Plaza",
+          "sortOrder": 1,
+          "createdAt": "2026-09-15T11:18:33.493Z"
+        },
+        {
+          "id": "5dcca5e3-0711-4adb-af9d-518dc91a23f4",
+          "projectId": "1a57b0f8-879b-436a-9b83-de86b7edfc3d",
+          "url": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200",
+          "caption": "Civic Center Exterior",
+          "sortOrder": 2,
+          "createdAt": "2026-09-15T11:18:33.493Z"
+        }
+      ]
+    },
+    {
+      "id": "7f320723-e0cf-4d58-bc77-bb85b6a3cd3b",
+      "title": "PMRDA LOGISTICS & INDUSTRIAL HUB",
+      "slug": "pmrda-logistics-hub",
+      "category": "Infrastructure",
+      "location": "Chakan, PMRDA Region, Pune",
+      "area": "42,000 Sq.M.",
+      "client": "PMRDA & Industrial Partners",
+      "year": "2023",
+      "shortDesc": "Integrated logistics park master planning and multi-tenant warehouse architectural design.",
+      "fullDesc": "A major infrastructure and logistics hub planned within the PMRDA region near Chakan. Korals Design delivered comprehensive GPR underground utility scanning, environmental permissions, building plan sanctions, and project management consultancy.",
+      "scopeOfWork": "[\"Master Logistics Park Layout\",\"Underground Utility Scanning (GPR)\",\"PMRDA & MPCB Clearance Facilitation\",\"Heavy Structural Foundation Design\",\"PMC Quality Control Certification\"]",
+      "coverImage": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200",
+      "isFeatured": false,
+      "isPublished": true,
+      "seoTitle": "PMRDA Logistics Hub | Korals Design Projects",
+      "seoDesc": "Logistics and industrial park consultancy under PMRDA jurisdiction in Pune, Maharashtra.",
+      "createdAt": "2026-09-15T11:18:33.502Z",
+      "updatedAt": "2026-09-15T11:18:33.502Z",
+      "images": [
+        {
+          "id": "4051eea1-caf2-4af2-b839-9815e18a9f60",
+          "projectId": "7f320723-e0cf-4d58-bc77-bb85b6a3cd3b",
+          "url": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80&w=1200",
+          "caption": "Logistics Terminal Overview",
+          "sortOrder": 1,
+          "createdAt": "2026-09-15T11:18:33.502Z"
+        }
+      ]
+    }
+  ],
+  "services": [
+    {
+      "id": "5e9271cc-e9ea-452d-a720-8a876d299fbd",
+      "number": "01",
+      "title": "Architectural Planning and Design",
+      "icon": "Compass",
+      "image": "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=1200",
+      "shortDesc": "Comprehensive architectural concepts, master planning, structural planning, and modern facility design tailored for SEZ and industrial zones.",
+      "fullDesc": "Korals Design Pvt Ltd delivers end-to-end architectural planning for industrial, corporate, institutional, and commercial projects. Our design philosophy combines structural durability, optimal spatial flow, regulatory compliance, and energy-efficient environmental design.",
+      "features": "[\"Master Site Planning & Layout Design\",\"Industrial Plant Layout & Structural Architecture\",\"Institutional & Corporate Headquarters Design\",\"3D Visualizations & Building Information Modeling (BIM)\",\"Environmental & Sustainable Building Integration\"]",
+      "isPublished": true,
+      "sortOrder": 1,
+      "createdAt": "2026-09-15T11:18:33.395Z",
+      "updatedAt": "2026-09-15T11:18:33.395Z"
+    },
+    {
+      "id": "57e5c814-eb73-4279-99bc-fdef84883ca6",
+      "number": "02",
+      "title": "Sanctions & Approvals",
+      "icon": "FileCheck",
+      "image": "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=1200",
+      "shortDesc": "Complete statutory clearance, technical liaisoning, and sanction approvals across government statutory bodies in Maharashtra.",
+      "fullDesc": "Navigating government approvals requires extensive technical knowledge and administrative expertise. We handle all approvals, NOCs, building permissions, and consents with state and municipal authorities.",
+      "features": "[\"Development Permissions & Building Plan Sanctions\",\"MPCB (Maharashtra Pollution Control Board) Consents\",\"MIDC (Maharashtra Industrial Development Corp) Clearances\",\"DISH (Directorate of Industrial Safety and Health) Approvals\",\"DSLR / SLR Revenue Clearances & Mojani\",\"PMRDA, PMC, and PCMC Statutory Clearances\"]",
+      "isPublished": true,
+      "sortOrder": 2,
+      "createdAt": "2026-09-15T11:18:33.406Z",
+      "updatedAt": "2026-09-15T11:18:33.406Z"
+    },
+    {
+      "id": "b4b4f93f-7406-4a02-b237-12674e5c07b9",
+      "number": "03",
+      "title": "Land Survey and Consultancy",
+      "icon": "MapPin",
+      "image": "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&q=80&w=1200",
+      "shortDesc": "High-precision geospatial surveys, sub-surface scanning, topographic mapping, and land revenue verification.",
+      "fullDesc": "Accurate land survey is the bedrock of any successful engineering project. Building on our legacy from Pensioners Land Surveyors Associates (est. 2005), we utilize advanced equipment including DGPS, total stations, and GPR systems.",
+      "features": "[\"Topographic & Detailed Contour Surveying\",\"Cutting & Filling Earthwork Quantity Calculation\",\"Land Revenue Survey & Boundary Delineation\",\"Government Mojani Coordination & Verification\",\"GPR (Ground Penetrating Radar) Underground Scanning\",\"EPL Survey & Sub-surface Utility Mapping\"]",
+      "isPublished": true,
+      "sortOrder": 3,
+      "createdAt": "2026-09-15T11:18:33.418Z",
+      "updatedAt": "2026-09-15T11:18:33.418Z"
+    },
+    {
+      "id": "8027c3ee-b34a-40c8-9595-399fa7574be6",
+      "number": "04",
+      "title": "Project Management Consultancy (PMC)",
+      "icon": "Briefcase",
+      "image": "https://images.unsplash.com/photo-1541888946425-d0fbb186a5b3?auto=format&fit=crop&q=80&w=1200",
+      "shortDesc": "End-to-end execution supervision, scheduling, quality assurance, estimation, tendering, and invoice certification.",
+      "fullDesc": "Our PMC services guarantee projects are completed within budget, on schedule, and to strict technical specifications. We safeguard client investments through rigorous quality audits and transparent vendor monitoring.",
+      "features": "[\"Project Master Planning & Timeline Scheduling (CPM/PERT)\",\"Bill of Quantities (BOQ) & Cost Estimation\",\"Contractor Tendering, Bid Evaluation & Vendor Selection\",\"On-site Execution Monitoring & Construction Supervision\",\"Quality Control Audits & Materials Testing Verification\",\"Contractor Billing & Invoice Certification\"]",
+      "isPublished": true,
+      "sortOrder": 4,
+      "createdAt": "2026-09-15T11:18:33.430Z",
+      "updatedAt": "2026-09-15T11:18:33.430Z"
+    },
+    {
+      "id": "cfbc1cfd-e254-408f-83a6-26ac091fb76b",
+      "number": "05",
+      "title": "Project Works Consultancy",
+      "icon": "CheckSquare",
+      "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&q=80&w=1200",
+      "shortDesc": "Technical feasibility studies, third-party inspection, construction audit, and handover documentation.",
+      "fullDesc": "Independent technical validation for asset owners, financial institutions, and government bodies. We provide objective assessments to mitigate construction risks and verify compliance.",
+      "features": "[\"Project Technical & Financial Feasibility Studies\",\"Third-Party Independent Inspection (TPI)\",\"Construction Quality Audits & As-Built Documentation\",\"Structural Stability Assessment & Due Diligence\",\"Final Handover Documentation & Clearance Verification\"]",
+      "isPublished": true,
+      "sortOrder": 5,
+      "createdAt": "2026-09-15T11:18:33.449Z",
+      "updatedAt": "2026-09-15T11:18:33.449Z"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "060af469-59c2-4ef5-8527-628be7608b7f",
+      "title": "Senior Architectural Designer",
+      "department": "Architectural Planning",
+      "location": "Pune, Maharashtra",
+      "experience": "5-8 Years",
+      "type": "Full-time",
+      "description": "We are seeking an experienced Architectural Designer to lead industrial and corporate master planning projects.",
+      "requirements": "[\"B.Arch or M.Arch from a recognized university\",\"Proficiency in AutoCAD, Revit, SketchUp, and BIM workflows\",\"Deep familiarity with MIDC, PMRDA, and PMC building bylaws\",\"Experience in industrial layout and structural coordination\"]",
+      "responsibilities": "[\"Develop architectural concepts and working drawings\",\"Coordinate with structural engineers, MEP consultants, and clients\",\"Prepare sanction drawing sets for statutory approvals\",\"Conduct periodic site visits for execution compliance\"]",
+      "isPublished": true,
+      "createdAt": "2026-09-15T11:18:33.512Z",
+      "updatedAt": "2026-09-15T11:18:33.512Z"
+    },
+    {
+      "id": "6d06c90f-07f3-485c-bc06-c566706bd43b",
+      "title": "Civil Engineer — Project Management (PMC)",
+      "department": "Project Management",
+      "location": "Pune / Site Locations",
+      "experience": "3-6 Years",
+      "type": "Full-time",
+      "description": "Responsible for on-site construction monitoring, BOQ verification, invoice certification, and quality assurance.",
+      "requirements": "[\"B.E. / B.Tech in Civil Engineering\",\"Proven experience in PMC or site execution for industrial buildings\",\"Strong knowledge of materials testing, IS codes, and safety standards\",\"Excellent vendor management and reporting skills\"]",
+      "responsibilities": "[\"Monitor day-to-day construction activities against schedules\",\"Perform quality control audits and sample testing\",\"Verify contractor billing and issue monthly invoice certifications\",\"Maintain daily site logs and safety compliance records\"]",
+      "isPublished": true,
+      "createdAt": "2026-09-15T11:18:33.512Z",
+      "updatedAt": "2026-09-15T11:18:33.512Z"
+    },
+    {
+      "id": "333ef38f-bbae-4be8-8e87-da01b123a35d",
+      "title": "Technical Liaison & Approval Executive",
+      "department": "Government Permissions",
+      "location": "Pune, Maharashtra",
+      "experience": "2-5 Years",
+      "type": "Full-time",
+      "description": "Coordinate statutory clearances and follow-up with government authorities including MPCB, MIDC, DISH, and PMRDA.",
+      "requirements": "[\"Degree/Diploma in Architecture or Civil Engineering\",\"Proven record of filing and tracking statutory clearance files\",\"In-depth knowledge of Maharashtra land revenue & building regulations\",\"Fluency in Marathi, English, and Hindi\"]",
+      "responsibilities": "[\"Prepare and submit sanction documentation to relevant authorities\",\"Liaise with officers at MPCB, MIDC, DISH, DSLR, PMRDA, and PMC\",\"Track status of NOCs and building permits\",\"Guide clients on regulatory compliance requirements\"]",
+      "isPublished": true,
+      "createdAt": "2026-09-15T11:18:33.512Z",
+      "updatedAt": "2026-09-15T11:18:33.512Z"
+    }
+  ],
+  "jobApplications": [],
+  "contactInquiries": [],
+  "media": [],
+  "websiteSettings": [
+    {
+      "id": "e60e30d9-f643-4787-a01e-f75721dfbd0d",
+      "key": "site_title",
+      "value": "Korals Design Pvt Ltd | Architecture & Engineering Consultancy",
+      "updatedAt": "2026-09-15T11:18:33.231Z"
+    },
+    {
+      "id": "8e014010-8115-4bfc-be71-6660854b9699",
+      "key": "hero_title",
+      "value": "INNOVATING INDUSTRIAL SPACES",
+      "updatedAt": "2026-09-15T11:18:33.241Z"
+    },
+    {
+      "id": "95b5720d-5330-4272-a0d9-c2d5daf7eb5e",
+      "key": "hero_subtitle",
+      "value": "End-to-End Solutions — Design, Approvals and Execution",
+      "updatedAt": "2026-09-15T11:18:33.259Z"
+    },
+    {
+      "id": "1da13019-fe07-4119-a989-a18b1312f5c6",
+      "key": "company_address",
+      "value": "201, Laximi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030",
+      "updatedAt": "2026-09-15T11:18:33.270Z"
+    },
+    {
+      "id": "340eee4a-90fc-4120-b012-10de3507ca66",
+      "key": "company_phone",
+      "value": "+020 - 24324648",
+      "updatedAt": "2026-09-15T11:18:33.288Z"
+    },
+    {
+      "id": "ae01ad4f-93df-44a2-94c6-a7e34f44caf9",
+      "key": "company_mobile",
+      "value": "+91 9822864648",
+      "updatedAt": "2026-09-15T11:18:33.297Z"
+    },
+    {
+      "id": "ac62a435-12e0-4380-91b4-8ed67718c82a",
+      "key": "company_email",
+      "value": "projects@koralsdesign.com",
+      "updatedAt": "2026-09-15T11:18:33.312Z"
+    },
+    {
+      "id": "b7b9fb9d-af7d-4b2c-9c53-95f2191bd9de",
+      "key": "stat_projects",
+      "value": "150+",
+      "updatedAt": "2026-09-15T11:18:33.320Z"
+    },
+    {
+      "id": "131dd6e9-31fa-4c56-a399-e383b2d3d324",
+      "key": "stat_sqft",
+      "value": "5.2M+",
+      "updatedAt": "2026-09-15T11:18:33.344Z"
+    },
+    {
+      "id": "033dda8a-9d9a-49cd-9439-fa90cfe40cf5",
+      "key": "stat_years",
+      "value": "20+",
+      "updatedAt": "2026-09-15T11:18:33.360Z"
+    },
+    {
+      "id": "ee55b65e-8979-4daf-8893-d14dddb25e4e",
+      "key": "stat_clients",
+      "value": "80+",
+      "updatedAt": "2026-09-15T11:18:33.371Z"
+    }
+  ],
+  "teamMembers": [
+    {
+      "id": "b3fadd7d-8cbe-4099-b3ec-cc9af292a2c6",
+      "name": "Mr. Mahesh Govardhan",
+      "role": "Director",
+      "bio": "Co-Director of Korals Design Pvt Ltd with over two decades of expertise in architectural design, civil engineering project management, and strategic industrial planning across Maharashtra.",
+      "image": "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800",
+      "sortOrder": 1,
+      "createdAt": "2026-09-15T11:18:33.384Z"
+    },
+    {
+      "id": "d650da1d-2887-4381-a93b-6b6ea3fb2267",
+      "name": "Mr. Uday Honap",
+      "role": "Director",
+      "bio": "Co-Director specializing in technical liaison, government permissions, statutory compliance, and large-scale infrastructure project execution.",
+      "image": "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=800",
+      "sortOrder": 2,
+      "createdAt": "2026-09-15T11:18:33.384Z"
+    }
+  ],
+  "testimonials": [],
+  "activityLogs": [
+    {
+      "id": "6ed32761-98fa-4a91-87f1-b2248d060126",
+      "action": "LOGIN",
+      "user": "admin@koralsdesign.com",
+      "module": "AUTHENTICATION",
+      "details": "Admin user logged in successfully",
+      "createdAt": "2026-09-15T12:44:07.182Z"
+    },
+    {
+      "id": "704d8496-9ffc-428f-8506-538c1bde8f79",
+      "action": "LOGIN",
+      "user": "admin@koralsdesign.com",
+      "module": "AUTHENTICATION",
+      "details": "Admin user logged in successfully",
+      "createdAt": "2026-09-15T12:44:13.962Z"
+    }
+  ]
+}
