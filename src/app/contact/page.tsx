@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import ContactClient from "./ContactClient";
 
 export const metadata: Metadata = {
-  title: "Contact 2nd Inversion Musical School | Pune",
+  title: "Contact Us | Korals Design Private Limited | Pune",
   description:
-    "Contact 2nd Inversion Musical School in Pune for admissions, masterclasses, vocal coaching, music theory, studio recording, and ensemble training.",
+    "Get in touch with Korals Design Private Limited for architectural, structural, and industrial engineering services, consultations, and project inquiries in Pune.",
   openGraph: {
-    title: "Contact 2nd Inversion Musical School | Pune",
+    title: "Contact Us | Korals Design Private Limited | Pune",
     description:
-      "Contact 2nd Inversion Musical School in Pune for admissions, masterclasses, vocal coaching, music theory, studio recording, and ensemble training.",
-    url: "https://2ndinversion.com/contact",
-    siteName: "2nd Inversion Musical School",
+      "Get in touch with Korals Design Private Limited for architectural, structural, and industrial engineering services, consultations, and project inquiries in Pune.",
+    siteName: "Korals Design Private Limited",
     type: "website",
   },
 };

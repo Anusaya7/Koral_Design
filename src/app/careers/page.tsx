@@ -4,8 +4,8 @@ import { MapPin, Mail, CheckCircle2 } from "lucide-react";
 import db from "@/lib/db";
 
 export const metadata = {
-  title: "Careers | 2nd Inversion Musical School — Open Faculty & Staff Positions",
-  description: "Explore career opportunities at 2nd Inversion Musical School in Pune, Maharashtra. Apply for music instructors, vocal coaches, studio audio engineers, and administrative roles.",
+  title: "Careers | Korals Design Private Limited — Open Engineering & Architectural Positions",
+  description: "Explore career opportunities at Korals Design Private Limited in Pune. Apply for senior structural engineers, CAD architects, project managers, and land surveyors.",
 };
 
 export default function CareersPage() {
@@ -29,13 +29,13 @@ export default function CareersPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
           <div className="max-w-3xl">
             <span className="inline-block px-3.5 py-1.5 rounded-full bg-white/10 text-white/90 border border-white/20 text-xs font-mono tracking-wider uppercase mb-6 backdrop-blur-md">
-              JOIN OUR FACULTY &amp; TEAM
+              JOIN OUR TEAM
             </span>
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 leading-tight">
-              Careers at 2nd Inversion
+              Careers at Korals Design
             </h1>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed font-normal">
-              Build your career with a premier music academy and performance training institute in Pune.
+              Build your career with a premier industrial &amp; architectural engineering firm in Pune.
             </p>
           </div>
         </div>
@@ -114,11 +114,11 @@ export default function CareersPage() {
         <div className="max-w-7xl mx-auto px-6 md:px-12 text-center max-w-2xl">
           <h2 className="text-3xl font-bold text-[#171717] mb-4">Don&apos;t See Your Role Listed?</h2>
           <p className="text-sm text-[#6B6B6B] mb-8 leading-relaxed">
-            We are always interested in meeting passionate instrument instructors, vocal coaches, and studio audio engineers in Pune.
+            We are always interested in meeting passionate structural engineers, architects, project managers, and land surveyors in Pune.
           </p>
 
           <a
-            href="mailto:info@2ndinversion.com?subject=Faculty Application — 2nd Inversion Musical School"
+            href="mailto:projects@koralsdesign.com?subject=Career Application — Korals Design Private Limited"
             className="inline-flex items-center gap-2.5 text-sm font-semibold bg-white text-[#171717] border border-[#E8E8E5] px-8 py-3.5 rounded-full hover:bg-[#E8E8E5]/50 transition-all shadow-xs"
           >
             <Mail className="w-4 h-4 text-[#171717]" />

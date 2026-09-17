@@ -11,22 +11,19 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-10 mb-16">
           {/* Brand Info (Span 2 cols on desktop) */}
           <div className="md:col-span-2">
-            <Link href="/" className="inline-flex items-center gap-2.5 mb-5" aria-label="2nd Inversion Musical School">
-              <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-600 font-bold font-mono text-lg shadow-inner">
-                2nd
-              </div>
-              <div className="flex flex-col">
-                <span className="font-bold tracking-tight text-lg text-[#171717] leading-tight">
-                  2nd Inversion
-                </span>
-                <span className="text-[10px] font-mono tracking-widest uppercase text-[#6B6B6B]">
-                  Musical School
-                </span>
+            <Link href="/" className="inline-block mb-5">
+              <div className="relative h-12 w-[260px] sm:w-[280px]">
+                <Image
+                  src="/images/logo/korals_logo.svg"
+                  alt="KORALS DESIGN PVT LTD Logo"
+                  fill
+                  className="object-contain object-left"
+                />
               </div>
             </Link>
 
             <p className="text-[#6B6B6B] max-w-sm leading-relaxed mb-6 text-xs">
-              Premier musical academy offering instrument masterclasses, vocal coaching, music theory, and live performance ensemble training in Pune, Maharashtra.
+              Architectural planning, civil engineering, land surveying, and statutory sanction consultancy for industrial, corporate, and municipal projects. Located in Pune, Maharashtra.
             </p>
 
             {/* Direct Contact Links */}
@@ -45,8 +42,8 @@ export default function Footer() {
               </div>
               <div className="flex items-center gap-2.5">
                 <Mail className="w-4 h-4 text-[#6B6B6B] shrink-0" />
-                <a href="mailto:info@2ndinversion.com" className="font-mono text-[#171717] font-semibold hover:underline">
-                  info@2ndinversion.com
+                <a href="mailto:projects@koralsdesign.com" className="font-mono text-[#171717] font-semibold hover:underline">
+                  projects@koralsdesign.com
                 </a>
               </div>
             </div>
@@ -79,22 +76,22 @@ export default function Footer() {
 
           {/* Services Quick List */}
           <div>
-            <h4 className="font-bold text-[#171717] uppercase tracking-wider mb-4 font-mono text-[11px]">Programs</h4>
+            <h4 className="font-bold text-[#171717] uppercase tracking-wider mb-4 font-mono text-[11px]">Core Practice</h4>
             <ul className="space-y-2.5 text-[#6B6B6B]">
               <li>
-                <Link href="/services" className="hover:text-[#171717] transition-colors">Instrument Masterclasses</Link>
+                <Link href="/services" className="hover:text-[#171717] transition-colors">Architectural Planning</Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-[#171717] transition-colors">Vocal Coaching &amp; Pitch</Link>
+                <Link href="/services" className="hover:text-[#171717] transition-colors">Sanctions &amp; Approvals</Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-[#171717] transition-colors">Music Theory &amp; Ear Training</Link>
+                <Link href="/services" className="hover:text-[#171717] transition-colors">Land Surveying &amp; Mojani</Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-[#171717] transition-colors">Ensemble &amp; Live Band</Link>
+                <Link href="/services" className="hover:text-[#171717] transition-colors">Project Management (PMC)</Link>
               </li>
               <li>
-                <Link href="/services" className="hover:text-[#171717] transition-colors">Studio Recording Techniques</Link>
+                <Link href="/services" className="hover:text-[#171717] transition-colors">Project Works Consultancy</Link>
               </li>
             </ul>
           </div>
@@ -121,7 +118,7 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-[#E8E8E5] flex flex-col md:flex-row items-center justify-between text-[#6B6B6B] gap-4">
-          <p>© 2026 2nd Inversion Musical School. All rights reserved.</p>
+          <p>© 2026 KORALS DESIGN PVT LTD (Korals Design Private Limited). All rights reserved.</p>
           <div className="flex flex-wrap items-center gap-4 md:gap-6 text-[11px]">
             <span>HQ: <span className="font-medium text-[#171717]">Pune, Maharashtra</span></span>
             <div className="flex flex-wrap items-center gap-3">

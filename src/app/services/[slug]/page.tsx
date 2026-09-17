@@ -60,17 +60,17 @@ export async function generateMetadata({
   }
 
   if (!service) {
-    return { title: "Program Not Found | 2nd Inversion Musical School" };
+    return { title: "Service Not Found | Korals Design Pvt Ltd" };
   }
 
   return {
-    title: `${service.title} | 2nd Inversion Musical School`,
+    title: `${service.title} | Korals Design Pvt Ltd`,
     description: service.short_description,
     openGraph: {
-      title: `${service.title} | 2nd Inversion Musical School`,
+      title: `${service.title} | Korals Design Pvt Ltd`,
       description: service.short_description,
-      url: `https://2ndinversion.com/services/${service.slug || service.id}`,
-      siteName: "2nd Inversion Musical School",
+      url: `https://www.koralsdesign.com/services/${service.slug || service.id}`,
+      siteName: "KORALS DESIGN PVT LTD",
     },
   };
 }
@@ -115,7 +115,7 @@ export default async function ServiceDetailPage({
               <span className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 text-white/90 border border-white/20 text-xs font-mono tracking-wider uppercase backdrop-blur-md">
                 SERVICE {service.service_number}
               </span>
-              <span className="text-xs font-mono text-white/60 uppercase">2ND INVERSION ACADEMY PROGRAM</span>
+              <span className="text-xs font-mono text-white/60 uppercase">KORALS DESIGN PRACTICE</span>
             </div>
 
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight leading-[1.1]">
@@ -248,7 +248,7 @@ export default async function ServiceDetailPage({
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-6 left-6 right-6 text-white text-xs font-mono">
-                  2ND INVERSION MUSICAL SCHOOL • PUNE
+                  KORALS DESIGN PVT LTD • PUNE
                 </div>
               </div>
 

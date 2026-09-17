@@ -29,12 +29,12 @@ interface SiteSettings {
 
 export default function ContactClient() {
   const [siteSettings, setSiteSettings] = useState<SiteSettings>({
-    company_name: "2nd Inversion Musical School",
+    company_name: "KORALS DESIGN PVT LTD",
     address: "201, Laxmi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030",
     phone: "+020 - 24324648",
     mobile: "+91 9822864648",
-    email: "info@2ndinversion.com",
-    career_email: "info@2ndinversion.com",
+    email: "projects@koralsdesign.com",
+    career_email: "projects@koralsdesign.com",
     google_maps_url: "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9?g_st=ac",
   });
 
@@ -291,7 +291,7 @@ export default function ContactClient() {
               </div>
               <div className="pt-6 border-t border-[#E8E8E5] mt-6">
                 <a
-                  href={`mailto:${siteSettings.career_email || siteSettings.email}?subject=${encodeURIComponent("Faculty Application — 2nd Inversion Musical School")}`}
+                  href={`mailto:${siteSettings.career_email || siteSettings.email}?subject=${encodeURIComponent("Career Application — Korals Design Private Limited")}`}
                   className="w-full py-2.5 px-4 rounded-full bg-[#F7F7F5] hover:bg-[#171717] hover:text-white text-[#171717] text-xs font-semibold flex items-center justify-center gap-2 transition-all duration-200 border border-[#E8E8E5]"
                 >
                   <Briefcase className="w-3.5 h-3.5" />
@@ -314,7 +314,7 @@ export default function ContactClient() {
               <div className="relative rounded-3xl overflow-hidden shadow-2xl border border-[#E8E8E5] min-h-[440px] flex flex-col justify-end p-8 text-white group">
                 <Image
                   src="/images/architecture_exterior_1.jpg"
-                  alt="2nd Inversion Musical School Academy Facility"
+                  alt="Korals Design Headquarters Facility"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.7]"
                 />
@@ -559,7 +559,7 @@ export default function ContactClient() {
               FIND US
             </h2>
             <p className="text-xs text-[#6B6B6B] leading-relaxed">
-              2nd Inversion Musical School — Parvati, Pune
+              Korals Design Private Limited — Parvati, Pune
             </p>
           </div>
 
@@ -599,7 +599,7 @@ export default function ContactClient() {
             <div className="lg:col-span-7 relative min-h-[320px] lg:min-h-[440px] bg-[#E8E8E5] flex items-center justify-center overflow-hidden group">
               <Image
                 src="/images/hero_villa_render.jpg"
-                alt="2nd Inversion Musical School Pune Location"
+                alt="Korals Design Pune Location"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.7]"
               />

@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "2nd Inversion Musical School — Premier Music Academy & Performance Training",
-  description: "Comprehensive musical education, instrument masterclasses, vocal training, theory, and performance programs at 2nd Inversion Musical School.",
-  keywords: ["2nd Inversion", "Musical School", "Music Academy", "Instrument Masterclasses", "Vocal Coaching", "Music Theory"],
-  authors: [{ name: "2nd Inversion Musical School Team" }],
+  title: "Korals Design Private Limited — Architectural & Civil Engineering Consultancy",
+  description: "Architectural planning, civil engineering project management, statutory government approvals, land surveying, and 3D spatial visualization in Pune, Maharashtra.",
+  keywords: ["Korals Design", "KORALS DESIGN PVT LTD", "Architectural Planning", "Civil Engineering Pune", "Statutory Approvals MIDC PMRDA", "Land Surveying Pune"],
+  authors: [{ name: "Korals Design Team" }],
   openGraph: {
-    title: "2nd Inversion Musical School — Premier Music Academy & Performance Training",
-    description: "Comprehensive musical education, instrument masterclasses, vocal training, theory, and performance programs.",
-    url: "https://2ndinversion.com",
-    siteName: "2nd Inversion Musical School",
+    title: "Korals Design Private Limited — Architectural & Civil Engineering Consultancy",
+    description: "Architectural planning, civil engineering project management, statutory government approvals, land surveying, and 3D spatial visualization in Pune, Maharashtra.",
+    url: "https://www.koralsdesign.com",
+    siteName: "Korals Design Private Limited",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "2nd Inversion Musical School — Premier Music Academy",
-    description: "Comprehensive musical education, instrument masterclasses, and vocal training.",
+    title: "Korals Design Private Limited — Architectural Practice Pune",
+    description: "Architectural planning, civil engineering project management, and statutory clearances in Pune.",
   },
 };
 

@@ -32,19 +32,15 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 flex items-center justify-between">
         {/* Brand Logo */}
-        <Link href="/" className="flex items-center gap-3 group" aria-label="2nd Inversion Musical School Homepage">
-          <div className="flex items-center gap-2.5">
-            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold font-mono text-lg shadow-inner">
-              2nd
-            </div>
-            <div className="flex flex-col">
-              <span className={`font-bold tracking-tight text-base sm:text-lg leading-tight ${scrolled ? "text-[#171717]" : "text-white"}`}>
-                2nd Inversion
-              </span>
-              <span className={`text-[10px] font-mono tracking-widest uppercase ${scrolled ? "text-[#6B6B6B]" : "text-white/70"}`}>
-                Musical School
-              </span>
-            </div>
+        <Link href="/" className="flex items-center gap-3 group" aria-label="KORALS DESIGN PVT LTD Homepage">
+          <div className="relative h-11 sm:h-12 w-[220px] sm:w-[265px]">
+            <Image
+              src={scrolled ? "/images/logo/korals_logo.svg" : "/images/logo/korals_logo_white.svg"}
+              alt="KORALS DESIGN PVT LTD Logo"
+              fill
+              className="object-contain object-left transition-opacity duration-300"
+              priority
+            />
           </div>
         </Link>
 

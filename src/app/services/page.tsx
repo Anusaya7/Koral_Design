@@ -2,15 +2,15 @@ import type { Metadata } from "next";
 import ServicesClient from "./ServicesClient";
 
 export const metadata: Metadata = {
-  title: "Musical Programs & Masterclasses | 2nd Inversion Musical School",
+  title: "Services | Korals Design Pvt Ltd",
   description:
-    "Explore instrument masterclasses, vocal coaching, music theory, studio recording, and ensemble performance programs at 2nd Inversion Musical School.",
+    "Explore architectural design, civil engineering project management, government approval support, land surveying, technical consultancy and project services by Korals Design Pvt Ltd.",
   openGraph: {
-    title: "Musical Programs & Masterclasses | 2nd Inversion Musical School",
+    title: "Services | Korals Design Pvt Ltd",
     description:
-      "Explore instrument masterclasses, vocal coaching, music theory, studio recording, and ensemble performance programs at 2nd Inversion Musical School.",
-    url: "https://2ndinversion.com/services",
-    siteName: "2nd Inversion Musical School",
+      "Explore architectural design, civil engineering project management, government approval support, land surveying, technical consultancy and project services by Korals Design Pvt Ltd.",
+    url: "https://www.koralsdesign.com/services",
+    siteName: "KORALS DESIGN PVT LTD",
     type: "website",
   },
 };

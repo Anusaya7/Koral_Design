@@ -60,7 +60,7 @@ export async function POST(req: Request) {
       employment_type,
       description || "",
       requirements || "",
-      application_email || "info@2ndinversion.com",
+      application_email || "projects@koralsdesign.com",
       display_order || 0,
       is_published !== undefined ? (is_published ? 1 : 0) : 1
     );

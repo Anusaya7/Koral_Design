@@ -76,7 +76,7 @@ export default function Hero() {
           {/* Fallback poster image if video unsupported */}
           <Image
             src="/images/hero_villa_render.jpg"
-            alt="2nd Inversion Musical School Background Visualization"
+            alt="KORALS DESIGN Hero Background Visualization"
             fill
             className="object-cover"
           />
@@ -94,52 +94,52 @@ export default function Hero() {
         
         {/* Eyebrow Pill */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white/90 text-xs font-mono tracking-wider uppercase mb-8 shadow-lg">
-          <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-          <span>2ND INVERSION MUSICAL SCHOOL</span>
+          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+          <span>QUALITY YOU CAN TRUST</span>
         </div>
 
         {/* Main Headline */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[88px] font-bold text-white tracking-[-0.035em] leading-[1.04] max-w-5xl mb-6 drop-shadow-md">
-          Master the Art &amp; <br className="hidden sm:inline" />
-          <span className="text-amber-300/90 font-normal italic font-serif">Soul of Music.</span>
+          Innovating Industrial &amp; <br className="hidden sm:inline" />
+          <span className="text-white/80 font-normal italic font-serif">Architectural</span> Spaces.
         </h1>
 
         {/* Supporting Copy */}
         <p className="text-lg md:text-xl text-white/80 max-w-2xl font-normal leading-relaxed mb-10 drop-shadow-sm">
-          Instrument Masterclasses, Professional Vocal Coaching &amp; Live Performance Training.
+          End-to-End Solutions — Design, Approvals and Execution.
         </p>
 
         {/* CTA Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-14 w-full sm:w-auto">
           <Link
-            href="/services"
+            href="/projects"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 text-base font-semibold bg-white text-[#171717] px-8 py-4 rounded-full hover:bg-[#F0F0ED] transition-all shadow-xl hover:shadow-2xl active:scale-98"
           >
             <Sparkles className="w-4.5 h-4.5 text-[#171717]" />
-            <span>Explore Programs</span>
+            <span>Explore Projects</span>
             <ArrowRight className="w-4 h-4 ml-1" />
           </Link>
           <Link
-            href="/contact"
+            href="/services"
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-base font-medium bg-white/10 backdrop-blur-md text-white border border-white/20 px-8 py-4 rounded-full hover:bg-white/20 hover:border-white/30 transition-all shadow-md"
           >
-            <span>Enrol Now</span>
+            <span>Our Services</span>
           </Link>
         </div>
 
         {/* Quick Metrics Bar */}
         <div className="flex items-center justify-center gap-6 md:gap-12 py-3.5 px-6 md:px-8 rounded-2xl bg-black/40 backdrop-blur-md border border-white/15 text-xs md:text-sm text-white/90 shadow-xl">
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-amber-400" />
-            <span>Instrument Mastery</span>
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span>Architectural Planning</span>
           </div>
           <div className="hidden sm:flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-amber-400" />
-            <span>Vocal Coaching</span>
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span>Statutory Clearances</span>
           </div>
           <div className="flex items-center gap-2">
-            <CheckCircle2 className="w-4 h-4 text-amber-400" />
-            <span>Theory &amp; Ear Training</span>
+            <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+            <span>Project Management</span>
           </div>
         </div>
 

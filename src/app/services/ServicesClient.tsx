@@ -84,7 +84,7 @@ export default function ServicesClient() {
             </h1>
 
             <p className="text-base sm:text-lg text-white/80 leading-relaxed font-normal">
-              2nd Inversion Musical School offers masterclasses in piano, guitar, drums, violin, vocal coaching, music theory, studio recording, and ensemble performance training.
+              Korals Design Pvt Ltd specializes in architectural design, civil engineering project management, and expertise in navigating government procedures and systems, including technical liaison with various government departments.
             </p>
 
             <div className="flex flex-wrap items-center gap-4 pt-4">
@@ -112,7 +112,7 @@ export default function ServicesClient() {
           
           <div className="text-center max-w-3xl mx-auto mb-16 md:mb-20">
             <span className="text-[10px] font-mono uppercase tracking-widest text-[#6B6B6B] block mb-2">
-              2ND INVERSION ACADEMY PROGRAMS
+              KORALS DESIGN PRACTICE AREAS
             </span>
             <h2 className="text-3xl sm:text-5xl font-bold text-[#171717] tracking-tight mb-4">
               PROFESSIONAL SERVICES
@@ -206,7 +206,7 @@ export default function ServicesClient() {
             <div className="lg:col-span-6 relative aspect-[4/3] w-full rounded-3xl overflow-hidden bg-[#181818] border border-[#E8E8E5] shadow-2xl group">
               <Image
                 src="/images/hero_villa_render.jpg"
-                alt="2nd Inversion Musical School Concept to Performance"
+                alt="Korals Design Concept to Completion"
                 fill
                 className="object-cover group-hover:scale-105 transition-transform duration-700 brightness-[0.8]"
               />
@@ -282,7 +282,7 @@ export default function ServicesClient() {
               GOVERNMENT PROCEDURES &amp; TECHNICAL LIAISON
             </h2>
             <p className="text-sm sm:text-base text-white/80 leading-relaxed font-normal">
-              2nd Inversion Musical School provides comprehensive musical education, structured performance training, and hands-on studio experience.
+              Korals Design Pvt Ltd brings expertise in navigating government procedures and systems, with technical liaison and coordination support involving various government departments and authorities.
             </p>
           </div>
 
@@ -347,7 +347,7 @@ export default function ServicesClient() {
         </div>
       </section>
 
-      {/* 5. WHY 2ND INVERSION SECTION */}
+      {/* 5. WHY KORALS DESIGN SECTION */}
       <section className="py-20 md:py-28 bg-[#F7F7F5]">
         <div className="max-w-7xl mx-auto px-6 md:px-12">
           
@@ -356,7 +356,7 @@ export default function ServicesClient() {
               VALUE PROPOSITION
             </span>
             <h2 className="text-3xl sm:text-5xl font-bold text-[#171717] tracking-tight mb-3">
-              WHY 2ND INVERSION
+              WHY KORALS DESIGN
             </h2>
             <p className="text-xs sm:text-sm text-[#6B6B6B] leading-relaxed">
               Factual, service-oriented engineering excellence across Maharashtra

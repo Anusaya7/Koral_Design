@@ -61,7 +61,7 @@ export default function ProjectsPage() {
               Featured Projects Portfolio
             </h1>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed font-normal">
-              Student showcases, live concerts, ensemble recitals, and studio recording productions presented by 2nd Inversion Musical School.
+              Industrial complexes, corporate headquarters, civic developments, and sustainable architectural projects engineered by Korals Design Private Limited.
             </p>
           </div>
         </div>

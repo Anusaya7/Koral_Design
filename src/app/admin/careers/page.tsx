@@ -27,7 +27,7 @@ export default function AdminCareersPage() {
     employment_type: "Full-Time",
     description: "",
     requirements: "",
-    application_email: "info@2ndinversion.com",
+    application_email: "projects@koralsdesign.com",
     display_order: 0,
     is_published: 1,
   });
@@ -56,7 +56,7 @@ export default function AdminCareersPage() {
       employment_type: "Full-Time",
       description: "",
       requirements: "",
-      application_email: "info@2ndinversion.com",
+      application_email: "projects@koralsdesign.com",
       display_order: careers.length + 1,
       is_published: 1,
     });
@@ -71,7 +71,7 @@ export default function AdminCareersPage() {
       employment_type: c.employment_type,
       description: c.description,
       requirements: c.requirements || "",
-      application_email: c.application_email || "info@2ndinversion.com",
+      application_email: c.application_email || "projects@koralsdesign.com",
       display_order: c.display_order,
       is_published: c.is_published,
     });
@@ -110,7 +110,7 @@ export default function AdminCareersPage() {
           <div>
             <h1 className="text-3xl font-bold text-[#171717] tracking-tight">Careers CMS Management</h1>
             <p className="text-xs text-[#6B6B6B] mt-1">
-              Add, edit or remove publicly listed job openings for 2nd Inversion Musical School
+              Add, edit or remove publicly listed job openings for Korals Design Private Limited
             </p>
           </div>
           <button
