@@ -62,7 +62,7 @@ export async function PUT(
       employment_type,
       description || "",
       requirements || "",
-      application_email || "projects@koralsdesign.com",
+      application_email || "info@2ndinversion.com",
       display_order || 0,
       is_published !== undefined ? (is_published ? 1 : 0) : 1,
       id

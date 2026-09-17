@@ -2,22 +2,22 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "FORMA AI — Generative Architectural & Product Visualization Studio",
-  description: "Transform concepts, wireframes, and sketches into photorealistic 8K studio-grade visualizations in seconds with powerful generative AI for architects and designers.",
-  keywords: ["AI visualization", "Architectural rendering AI", "Sketch to render", "Interior design AI", "3D product rendering", "FORMA AI"],
-  authors: [{ name: "FORMA AI Team" }],
+  title: "2nd Inversion Musical School — Premier Music Academy & Performance Training",
+  description: "Comprehensive musical education, instrument masterclasses, vocal training, theory, and performance programs at 2nd Inversion Musical School.",
+  keywords: ["2nd Inversion", "Musical School", "Music Academy", "Instrument Masterclasses", "Vocal Coaching", "Music Theory"],
+  authors: [{ name: "2nd Inversion Musical School Team" }],
   openGraph: {
-    title: "FORMA AI — Generative Architectural & Product Visualization Studio",
-    description: "Transform concepts, wireframes, and sketches into photorealistic studio-grade visualizations in seconds.",
-    url: "https://forma-ai.studio",
-    siteName: "FORMA AI",
+    title: "2nd Inversion Musical School — Premier Music Academy & Performance Training",
+    description: "Comprehensive musical education, instrument masterclasses, vocal training, theory, and performance programs.",
+    url: "https://2ndinversion.com",
+    siteName: "2nd Inversion Musical School",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FORMA AI — Next-Gen AI Visualization",
-    description: "Architectural & product visualization powered by generative AI.",
+    title: "2nd Inversion Musical School — Premier Music Academy",
+    description: "Comprehensive musical education, instrument masterclasses, and vocal training.",
   },
 };
 

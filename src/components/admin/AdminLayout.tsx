@@ -82,13 +82,11 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     <div className="min-h-screen bg-[#F7F7F5] text-[#171717] flex flex-col md:flex-row">
       {/* Mobile Header Topbar */}
       <div className="md:hidden bg-[#181818] text-white p-4 flex items-center justify-between z-40">
-        <div className="relative h-7 w-[160px]">
-          <Image
-            src="/images/logo/korals_logo_white.svg"
-            alt="Korals Design Logo"
-            fill
-            className="object-contain object-left"
-          />
+        <div className="flex items-center gap-2">
+          <div className="w-7 h-7 rounded-lg bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold font-mono text-sm">
+            2nd
+          </div>
+          <span className="font-bold text-sm tracking-tight">2nd Inversion CMS</span>
         </div>
         <button onClick={() => setSidebarOpen(!sidebarOpen)} className="p-1 text-white">
           {sidebarOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -104,14 +102,13 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         <div>
           {/* Logo Header */}
           <div className="mb-8 pt-2">
-            <Link href="/" className="inline-block">
-              <div className="relative h-9 w-[190px]">
-                <Image
-                  src="/images/logo/korals_logo_white.svg"
-                  alt="Korals Design Logo"
-                  fill
-                  className="object-contain object-left"
-                />
+            <Link href="/" className="flex items-center gap-2.5">
+              <div className="w-8 h-8 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold font-mono text-base shadow-inner">
+                2nd
+              </div>
+              <div className="flex flex-col">
+                <span className="font-bold text-white text-base leading-tight">2nd Inversion</span>
+                <span className="text-[10px] font-mono text-white/50 uppercase tracking-wider">Musical School</span>
               </div>
             </Link>
             <span className="block text-[10px] font-mono text-white/50 uppercase tracking-widest mt-1">
@@ -219,13 +216,14 @@ function AdminLoginScreen({ onLoginSuccess }: { onLoginSuccess: () => void }) {
     <div className="min-h-screen bg-[#181818] text-white flex items-center justify-center p-6">
       <div className="w-full max-w-md bg-[#222222] p-8 md:p-10 rounded-3xl border border-white/10 shadow-2xl space-y-8">
         <div className="text-center">
-          <div className="relative h-12 w-[220px] mx-auto mb-4">
-            <Image
-              src="/images/logo/korals_logo_white.svg"
-              alt="Korals Design Pvt Ltd Logo"
-              fill
-              className="object-contain"
-            />
+          <div className="flex items-center justify-center gap-2.5 mb-3">
+            <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold font-mono text-xl shadow-inner">
+              2nd
+            </div>
+            <div className="flex flex-col text-left">
+              <span className="font-bold text-white text-lg leading-tight">2nd Inversion</span>
+              <span className="text-[10px] font-mono text-white/60 uppercase tracking-widest">Musical School</span>
+            </div>
           </div>
           <p className="text-xs font-mono text-white/60 uppercase tracking-widest">
             CMS Admin Authentication
@@ -273,7 +271,7 @@ function AdminLoginScreen({ onLoginSuccess }: { onLoginSuccess: () => void }) {
         </form>
 
         <div className="text-center text-[11px] font-mono text-white/40 pt-4 border-t border-white/10">
-          Korals Design Private Limited • Pune Headquarters
+          2nd Inversion Musical School • Admin Control Portal
         </div>
       </div>
     </div>

@@ -9,32 +9,32 @@ export default function AdminContentPage() {
   const [saveSuccess, setSaveSuccess] = useState(false);
 
   const [siteSettings, setSiteSettings] = useState({
-    company_name: "KORALS DESIGN PVT LTD",
-    company_legal_name: "Korals Design Private Limited",
-    address: "201, Laximi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030",
+    company_name: "2nd Inversion Musical School",
+    company_legal_name: "2nd Inversion Musical School",
+    address: "201, Laxmi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030",
     phone: "+020 - 24324648",
     mobile: "+91 9822864648",
-    email: "projects@koralsdesign.com",
-    career_email: "projects@koralsdesign.com",
+    email: "info@2ndinversion.com",
+    career_email: "info@2ndinversion.com",
     location_city: "Parvati, Pune, Maharashtra, India",
     google_maps_url: "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9?g_st=ac",
   });
 
   const [homepageContent, setHomepageContent] = useState({
-    eyebrow: "QUALITY YOU CAN TRUST",
-    hero_title: "Innovating Industrial & Architectural Spaces.",
-    hero_subtitle: "End-to-End Solutions — Design, Approvals and Execution.",
-    hero_primary_cta_text: "Explore Projects",
-    hero_primary_cta_link: "/projects",
-    hero_secondary_cta_text: "Our Services",
-    hero_secondary_cta_link: "/services",
+    eyebrow: "2ND INVERSION MUSICAL SCHOOL",
+    hero_title: "Master the Art & Soul of Music.",
+    hero_subtitle: "Instrument Masterclasses, Professional Vocal Coaching & Live Performance Training.",
+    hero_primary_cta_text: "Explore Programs",
+    hero_primary_cta_link: "/services",
+    hero_secondary_cta_text: "Enrol Now",
+    hero_secondary_cta_link: "/contact",
   });
 
   const [aboutContent, setAboutContent] = useState({
-    company_overview: "Korals Design Private Limited is an architectural services provider located in Pune, Maharashtra, India.",
-    history_timeline: "Beginning in 2005 with Pensioners Land Surveyors Associates, expanding in 2013 into Korals Engineering Solutions Private Limited with experience across SEZs, industrial, institutional, and corporate projects, and establishing Korals Design Private Limited in 2020.",
-    capabilities: "Architectural planning and design, civil engineering project management, government procedures, technical liaison with government departments, land surveying, and 3D spatial visualization.",
-    culture_statement: "Professional growth, employee voice, team development, positive workplace environment, high productivity, and active employee engagement.",
+    company_overview: "2nd Inversion Musical School is a premier music academy dedicated to excellence in musical education, instrument masterclasses, vocal coaching, and audio production.",
+    history_timeline: "Founded with a passion for musical mastery, 2nd Inversion Musical School has nurtured hundreds of musicians, vocalists, and composers across classical, contemporary, and modern performance disciplines.",
+    capabilities: "Instrument masterclasses (Piano, Guitar, Drums, Violin), vocal training, music theory & ear training, studio audio recording, and live ensemble workshops.",
+    culture_statement: "Inspiring artistic expression, individual creativity, collaborative performance, and a lifelong passion for musical craft.",
   });
 
   useEffect(() => {

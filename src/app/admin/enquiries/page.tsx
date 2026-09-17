@@ -79,7 +79,7 @@ export default function AdminEnquiriesPage() {
           <div>
             <h1 className="text-3xl font-bold text-[#171717] tracking-tight">Contact Enquiries Database</h1>
             <p className="text-xs text-[#6B6B6B] mt-1">
-              View, track, filter, and manage public contact form enquiries submitted to Korals Design Private Limited
+              View, track, filter, and manage public contact form enquiries submitted to 2nd Inversion Musical School
             </p>
           </div>
 

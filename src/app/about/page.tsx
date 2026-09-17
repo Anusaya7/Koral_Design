@@ -6,8 +6,8 @@ import { ArrowRight, CheckCircle2, ShieldCheck, Building2, Landmark, Award } fro
 import db from "@/lib/db";
 
 export const metadata = {
-  title: "About Us | KORALS DESIGN PVT LTD — Architectural & Engineering Firm Pune",
-  description: "Learn about Korals Design Private Limited, an architectural and civil engineering project management firm located in Pune, Maharashtra. Established history since 2005 across industrial, SEZ, corporate and institutional sectors.",
+  title: "About Us | 2nd Inversion Musical School — Premier Music Academy Pune",
+  description: "Learn about 2nd Inversion Musical School, a premier music academy offering instrument masterclasses, vocal coaching, music theory, and performance programs in Pune, Maharashtra.",
 };
 
 export default function AboutPage() {
@@ -32,10 +32,10 @@ export default function AboutPage() {
               COMPANY OVERVIEW &amp; HISTORY
             </span>
             <h1 className="text-4xl sm:text-6xl font-bold tracking-tight mb-6 leading-tight">
-              About Korals Design Private Limited
+              About 2nd Inversion Musical School
             </h1>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed font-normal">
-              An architectural services and civil engineering project management provider headquartered in Pune, Maharashtra, India.
+              A premier music academy offering instrument masterclasses, vocal coaching, music theory, and ensemble performance training in Pune, Maharashtra.
             </p>
           </div>
         </div>
@@ -54,24 +54,24 @@ export default function AboutPage() {
               </h2>
               <div className="space-y-4 text-base text-[#6B6B6B] leading-relaxed">
                 <p>
-                  <strong>Korals Design Private Limited</strong> is a leading architectural design and statutory approvals consultancy based in Pune, Maharashtra.
+                  <strong>2nd Inversion Musical School</strong> is a premier music academy dedicated to musical education, performance excellence, and artistic innovation based in Pune, Maharashtra.
                 </p>
                 <p>
-                  Our journey began in <strong>2005</strong> with <em>Pensioners Land Surveyors Associates</em>, focusing on precision ground survey and land revenue demarcation. In <strong>2013</strong>, we expanded our operations into <em>Korals Engineering Solutions Private Limited</em>, broadening our scope across Special Economic Zones (SEZs), heavy industrial manufacturing plants, corporate offices, and municipal institutional developments.
+                  Founded with a vision for musical mastery, our academy provides structured instrument masterclasses in piano, guitar, drums, and violin, alongside professional vocal coaching and ear training.
                 </p>
                 <p>
-                  In <strong>2020</strong>, <strong>Korals Design Private Limited</strong> was established to provide an integrated, single-window solution incorporating architectural planning, civil engineering project management, statutory government sanctions (MIDC, MPCB, DISH, PMRDA, PMC, PCMC), and 3D visual walkthroughs.
+                  We empower aspiring musicians, vocalists, and performers through individual mentorship, live ensemble recitals, and studio recording experience.
                 </p>
               </div>
 
               <div className="grid grid-cols-2 gap-6 mt-10 pt-8 border-t border-[#E8E8E5]">
                 <div>
-                  <h3 className="text-3xl font-bold text-[#171717] font-mono mb-1">2005</h3>
-                  <p className="text-xs text-[#6B6B6B]">Land Surveying Roots Established</p>
+                  <h3 className="text-3xl font-bold text-[#171717] font-mono mb-1">500+</h3>
+                  <p className="text-xs text-[#6B6B6B]">Graduated Musicians &amp; Vocalists</p>
                 </div>
                 <div>
-                  <h3 className="text-3xl font-bold text-[#171717] font-mono mb-1">2020</h3>
-                  <p className="text-xs text-[#6B6B6B]">Korals Design Pvt Ltd Incorporation</p>
+                  <h3 className="text-3xl font-bold text-[#171717] font-mono mb-1">100%</h3>
+                  <p className="text-xs text-[#6B6B6B]">Performance &amp; Practical Focus</p>
                 </div>
               </div>
             </div>
@@ -79,14 +79,14 @@ export default function AboutPage() {
             <div className="relative aspect-[4/3] rounded-3xl overflow-hidden bg-[#181818] border border-[#E8E8E5] shadow-2xl">
               <Image
                 src="/images/architecture_exterior_1.jpg"
-                alt="Korals Design Private Limited Architecture"
+                alt="2nd Inversion Musical School Facility"
                 fill
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
               <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-md p-4 rounded-2xl border border-[#E8E8E5]">
-                <p className="text-xs font-semibold text-[#171717]">Architectural &amp; Engineering Practice</p>
-                <p className="text-[11px] text-[#6B6B6B]">Pune • Kasarwadi • Bhosari • Chakan MIDC • PMRDA</p>
+                <p className="text-xs font-semibold text-[#171717]">2nd Inversion Musical School</p>
+                <p className="text-[11px] text-[#6B6B6B]">Pune • Parvati • Practice Studios &amp; Performance Stage</p>
               </div>
             </div>
           </div>
@@ -163,7 +163,7 @@ export default function AboutPage() {
                   </p>
                 </div>
                 <div className="pt-4 border-t border-[#E8E8E5] flex items-center justify-between text-xs font-semibold text-[#171717]">
-                  <span>Korals Design Private Limited</span>
+                  <span>2nd Inversion Musical School</span>
                   <Award className="w-4 h-4 text-[#171717]" />
                 </div>
               </div>
@@ -184,21 +184,21 @@ export default function AboutPage() {
                 People &amp; Culture
               </h2>
               <p className="text-base text-[#6B6B6B] leading-relaxed mb-8">
-                At Korals Design Private Limited, we prioritize continuous professional growth, transparent employee communication, active team engagement, and a supportive workplace environment that fosters high engineering productivity and technical excellence.
+                At 2nd Inversion Musical School, we prioritize artistic growth, masterclass mentorship, collaborative ensemble performance, and a supportive learning environment that fosters musical excellence.
               </p>
 
               <ul className="space-y-4 text-sm text-[#171717] mb-10">
                 <li className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#171717]" />
-                  <span>Structured professional development and site training</span>
+                  <span>Structured instrument masterclasses and vocal coaching</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#171717]" />
-                  <span>Empowered employee voice and collaborative decision-making</span>
+                  <span>Live stage performances and student recitals</span>
                 </li>
                 <li className="flex items-center gap-3">
                   <CheckCircle2 className="w-5 h-5 text-[#171717]" />
-                  <span>High safety and quality standards across all project sites</span>
+                  <span>Studio recording techniques and audio engineering</span>
                 </li>
               </ul>
 
@@ -206,7 +206,7 @@ export default function AboutPage() {
                 href="/careers"
                 className="inline-flex items-center gap-2.5 text-sm font-semibold bg-[#171717] text-white px-7 py-3.5 rounded-full hover:bg-[#2A2A28] transition-all shadow-md"
               >
-                <span>View Career Opportunities</span>
+                <span>View Faculty Opportunities</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -214,7 +214,7 @@ export default function AboutPage() {
             <div className="relative aspect-square rounded-3xl overflow-hidden bg-[#181818] border border-[#E8E8E5] shadow-xl">
               <Image
                 src="/images/interior_lounge_1.jpg"
-                alt="Korals Design Workplace Environment"
+                alt="2nd Inversion Musical School Academy Environment"
                 fill
                 className="object-cover"
               />

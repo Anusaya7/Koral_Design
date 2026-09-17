@@ -133,13 +133,13 @@ export function initDb() {
   const settingsCheck = db.prepare("SELECT COUNT(*) as count FROM site_settings").get() as { count: number };
   if (settingsCheck.count === 0) {
     const defaultSettings = [
-      ["company_name", "KORALS DESIGN PVT LTD"],
-      ["company_legal_name", "Korals Design Private Limited"],
-      ["address", "201, Laximi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030"],
+      ["company_name", "2nd Inversion Musical School"],
+      ["company_legal_name", "2nd Inversion Musical School"],
+      ["address", "201, Laxmi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030"],
       ["phone", "+020 - 24324648"],
       ["mobile", "+91 9822864648"],
-      ["email", "projects@koralsdesign.com"],
-      ["career_email", "projects@koralsdesign.com"],
+      ["email", "info@2ndinversion.com"],
+      ["career_email", "info@2ndinversion.com"],
       ["location_city", "Parvati, Pune, Maharashtra, India"],
       ["google_maps_url", "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9?g_st=ac"],
     ];
@@ -150,8 +150,11 @@ export function initDb() {
   } else {
     const updateSetting = db.prepare("INSERT OR REPLACE INTO site_settings (key, value) VALUES (?, ?)");
     updateSetting.run("google_maps_url", "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9?g_st=ac");
-    updateSetting.run("address", "201, Laximi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030");
-    updateSetting.run("career_email", "projects@koralsdesign.com");
+    updateSetting.run("address", "201, Laxmi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030");
+    updateSetting.run("email", "info@2ndinversion.com");
+    updateSetting.run("career_email", "info@2ndinversion.com");
+    updateSetting.run("company_name", "2nd Inversion Musical School");
+    updateSetting.run("company_legal_name", "2nd Inversion Musical School");
   }
 
   // 3. Seed Default Homepage Content
@@ -176,10 +179,10 @@ export function initDb() {
   const aboutCheck = db.prepare("SELECT COUNT(*) as count FROM about_content").get() as { count: number };
   if (aboutCheck.count === 0) {
     const defaultAbout = [
-      ["company_overview", "Korals Design Private Limited is an architectural services provider located in Pune, Maharashtra, India."],
-      ["history_timeline", "Beginning in 2005 with Pensioners Land Surveyors Associates, expanding in 2013 into Korals Engineering Solutions Private Limited with experience across SEZs, industrial, institutional, and corporate projects, and establishing Korals Design Private Limited in 2020."],
-      ["capabilities", "Architectural planning and design, civil engineering project management, government procedures, technical liaison with government departments, land surveying, and 3D spatial visualization."],
-      ["culture_statement", "Professional growth, employee voice, team development, positive workplace environment, high productivity, and active employee engagement."],
+      ["company_overview", "2nd Inversion Musical School is a premier music academy dedicated to excellence in musical education, instrument masterclasses, vocal coaching, and audio production."],
+      ["history_timeline", "Founded with a passion for musical mastery, 2nd Inversion Musical School has nurtured hundreds of musicians, vocalists, and composers across classical, contemporary, and modern performance disciplines."],
+      ["capabilities", "Instrument masterclasses (Piano, Guitar, Drums, Violin), vocal training, music theory & ear training, studio audio recording, and live ensemble workshops."],
+      ["culture_statement", "Inspiring artistic expression, individual creativity, collaborative performance, and a lifelong passion for musical craft."],
     ];
     const insertAbout = db.prepare("INSERT OR IGNORE INTO about_content (key, value) VALUES (?, ?)");
     for (const [k, v] of defaultAbout) {
@@ -191,8 +194,8 @@ export function initDb() {
   const leaderCheck = db.prepare("SELECT COUNT(*) as count FROM leadership").get() as { count: number };
   if (leaderCheck.count === 0) {
     const leaders = [
-      ["Mr. Mahesh Govardhan", "Director", "Director at Korals Design Private Limited, overseeing architectural planning, statutory approvals, and strategic project management.", "/images/hero_villa_render.jpg", 1],
-      ["Mr. Uday Honap", "Director", "Director at Korals Design Private Limited, leading civil engineering operations, land survey consultancy, and technical government liaison.", "/images/interior_lounge_1.jpg", 2],
+      ["Mahesh Govardhan", "Academic Director & Head of Piano", "Academic Director at 2nd Inversion Musical School, overseeing classical music theory, piano curriculum, and academy growth.", "/images/hero_villa_render.jpg", 1],
+      ["Uday Honap", "Director & Master Vocal Coach", "Director at 2nd Inversion Musical School, leading vocal training programs, ensemble performances, and acoustic stage management.", "/images/interior_lounge_1.jpg", 2],
     ];
     const insertLeader = db.prepare("INSERT INTO leadership (name, role, bio, image, display_order) VALUES (?, ?, ?, ?, ?)");
     for (const l of leaders) {
@@ -200,7 +203,7 @@ export function initDb() {
     }
   }
 
-  // 6. Seed All 8 Professional Services for KORALS DESIGN PVT LTD
+  // 6. Seed All 8 Professional Services for 2nd Inversion Musical School
   const serviceCheck = db.prepare("SELECT COUNT(*) as count FROM services").get() as { count: number };
   if (serviceCheck.count < 8) {
     db.prepare("DELETE FROM services").run(); // Clear partial list to ensure clean seed of 8 services
@@ -211,7 +214,7 @@ export function initDb() {
         "Architectural Planning & Design",
         "architectural-design",
         "Comprehensive architectural planning, master planning, CAD drawing, and 3D spatial design for industrial, institutional, commercial and corporate developments.",
-        "Korals Design provides architectural planning and design solutions for industrial plants, commercial headquarters, and institutional campuses in accordance with national building codes and municipal guidelines.",
+        "2nd Inversion Musical School provides architectural planning and acoustic studio design solutions for performance halls, rehearsal spaces, and academies.",
         "Architectural Planning,Building Design,Concept Development,Space Planning,Design Development,Construction Documentation,3D Visualization,Walkthroughs",
         "/images/architecture_exterior_1.jpg",
         "Compass",
@@ -398,7 +401,7 @@ export function initDb() {
         "Full-Time",
         "Oversee site safety compliance, implement hazard mitigation protocols, and ensure DISH / OSHA safety standards across industrial construction sites.",
         "Degree/Diploma in Industrial Safety or Civil Engineering; 5+ years industrial site experience; Expert knowledge of DISH safety norms.",
-        "projects@koralsdesign.com",
+        "info@2ndinversion.com",
         1,
         1
       ],
@@ -408,7 +411,7 @@ export function initDb() {
         "Full-Time",
         "Coordinate site safety audits, conduct employee safety briefings, maintain accident logs, and ensure daily site compliance.",
         "Diploma in Safety Management / Civil; 2+ years field experience; Strong communication and documentation skills.",
-        "projects@koralsdesign.com",
+        "info@2ndinversion.com",
         2,
         1
       ]

@@ -61,7 +61,7 @@ export default function ProjectsPage() {
               Featured Projects Portfolio
             </h1>
             <p className="text-lg md:text-xl text-white/80 leading-relaxed font-normal">
-              Industrial facilities, municipal civil developments, and corporate campuses engineered by Korals Design Private Limited across Maharashtra.
+              Student showcases, live concerts, ensemble recitals, and studio recording productions presented by 2nd Inversion Musical School.
             </p>
           </div>
         </div>

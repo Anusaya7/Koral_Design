@@ -2,7 +2,7 @@ import { SignJWT, jwtVerify } from "jose";
 import { cookies } from "next/headers";
 
 const JWT_SECRET = new TextEncoder().encode(
-  process.env.JWT_SECRET || "korals-design-jwt-secret-key-pune-2026"
+  process.env.JWT_SECRET || "2nd-inversion-musical-school-jwt-secret-key-2026"
 );
 
 export async function createAdminToken(username: string) {

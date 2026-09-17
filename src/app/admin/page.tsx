@@ -63,7 +63,7 @@ export default function AdminDashboardPage() {
           <div>
             <h1 className="text-3xl font-bold text-[#171717] tracking-tight">Admin CMS Dashboard</h1>
             <p className="text-xs text-[#6B6B6B] mt-1">
-              KORALS DESIGN PVT LTD • Live Database &amp; Content Management
+              2nd Inversion Musical School • Live Database &amp; Content Management
             </p>
           </div>
           <div className="flex items-center gap-3">
