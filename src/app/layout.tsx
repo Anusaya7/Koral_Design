@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import CustomCursor from "@/components/CustomCursor";
+import { ThemeProvider } from "@/context/ThemeContext";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -27,11 +29,33 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="scroll-smooth">
-      <body className="bg-[#F7F7F5] text-[#171717] antialiased selection:bg-[#171717] selection:text-[#FFFFFF] min-h-screen flex flex-col font-sans">
-        {children}
+    <html lang="en" className="dark scroll-smooth">
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var saved = localStorage.getItem('kd_theme');
+                  if (saved === 'light') {
+                    document.documentElement.classList.add('light');
+                    document.documentElement.classList.remove('dark');
+                  } else {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.classList.remove('light');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="bg-[#F7F7F5] dark:bg-[#181818] text-[#171717] dark:text-[#F7F7F5] antialiased selection:bg-[#171717] selection:text-[#FFFFFF] dark:selection:bg-white dark:selection:text-[#171717] min-h-screen flex flex-col font-sans transition-colors duration-300">
+        <ThemeProvider>
+          <CustomCursor />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );
 }
-

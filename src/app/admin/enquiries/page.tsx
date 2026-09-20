@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import AdminLayout from "@/components/admin/AdminLayout";
-import { Mail, Trash2, Eye, X, Phone, User, Search } from "lucide-react";
+import { Mail, Trash2, Eye, X, Phone, User, Search, AlertTriangle } from "lucide-react";
 
 interface Enquiry {
   id: number;
@@ -21,6 +21,7 @@ export default function AdminEnquiriesPage() {
   const [selectedEnquiry, setSelectedEnquiry] = useState<Enquiry | null>(null);
   const [statusFilter, setStatusFilter] = useState("ALL");
   const [searchQuery, setSearchQuery] = useState("");
+  const [deleteId, setDeleteId] = useState<number | null>(null);
 
   const loadEnquiries = () => {
     fetch("/api/enquiries")
@@ -49,11 +50,12 @@ export default function AdminEnquiriesPage() {
     }
   };
 
-  const handleDelete = async (id: number) => {
-    if (!confirm("Delete this enquiry record?")) return;
-    const res = await fetch(`/api/enquiries/${id}`, { method: "DELETE" });
+  const confirmDelete = async () => {
+    if (!deleteId) return;
+    const res = await fetch(`/api/enquiries/${deleteId}`, { method: "DELETE" });
     if (res.ok) {
-      if (selectedEnquiry?.id === id) setSelectedEnquiry(null);
+      if (selectedEnquiry?.id === deleteId) setSelectedEnquiry(null);
+      setDeleteId(null);
       loadEnquiries();
     }
   };
@@ -75,23 +77,30 @@ export default function AdminEnquiriesPage() {
   return (
     <AdminLayout>
       <div className="space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E8E8E5]">
+        
+        {/* Header Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#E8E8E5]">
           <div>
-            <h1 className="text-3xl font-bold text-[#171717] tracking-tight">Contact Enquiries Database</h1>
-            <p className="text-xs text-[#6B6B6B] mt-1">
-              View, track, filter, and manage public contact form enquiries submitted to Korals Design Private Limited
+            <span className="text-[11px] font-mono tracking-widest text-[#6B6B6B] uppercase block mb-1">
+              05 / ENQUIRIES
+            </span>
+            <h1 className="text-3xl font-bold text-[#171717] tracking-tight uppercase">
+              CLIENT ENQUIRIES DATABASE
+            </h1>
+            <p className="text-xs font-mono text-[#6B6B6B] mt-1">
+              Inspect, track status, filter and respond to project enquiries from the public contact form
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1.5 font-mono">
             {["ALL", "NEW", "READ", "IN PROGRESS", "REPLIED", "CLOSED"].map((st) => (
               <button
                 key={st}
                 onClick={() => setStatusFilter(st)}
-                className={`px-3 py-1.5 rounded-full text-xs font-mono font-semibold transition-all ${
+                className={`px-3 py-1.5 rounded-full text-[11px] font-bold uppercase transition-all cursor-pointer ${
                   statusFilter === st
                     ? "bg-[#171717] text-white shadow-xs"
-                    : "bg-white text-[#171717] border border-[#E8E8E5]"
+                    : "bg-white text-[#171717] border border-[#E8E8E5] hover:border-[#171717]"
                 }`}
               >
                 {st}
@@ -106,38 +115,38 @@ export default function AdminEnquiriesPage() {
             <Search className="w-4 h-4 text-[#6B6B6B] absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
-              placeholder="Search by name, email, subject..."
+              placeholder="Search by client name, email, subject..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full bg-white border border-[#E8E8E5] rounded-full pl-10 pr-4 py-2 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+              className="w-full bg-white border border-[#E8E8E5] rounded-full pl-10 pr-4 py-2 text-xs text-[#171717] focus:outline-none focus:border-[#171717] font-mono"
             />
           </div>
           <span className="text-xs text-[#6B6B6B] font-mono">
-            Showing {filteredEnquiries.length} of {enquiries.length} total enquiries
+            SHOWING {filteredEnquiries.length} OF {enquiries.length} TOTAL ENQUIRIES
           </span>
         </div>
 
-        {/* Enquiries Table */}
-        <div className="bg-white rounded-3xl border border-[#E8E8E5] overflow-hidden shadow-xs">
+        {/* Enquiries Data Table */}
+        <div className="bg-white rounded-2xl border border-[#E8E8E5] overflow-hidden shadow-2xs">
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
+            <table className="w-full text-left text-xs font-mono">
               <thead>
-                <tr className="border-b border-[#E8E8E5] bg-[#F7F7F5] text-[#6B6B6B] font-mono uppercase">
+                <tr className="border-b border-[#E8E8E5] bg-[#F7F7F5] text-[#6B6B6B] uppercase">
                   <th className="py-3.5 px-4">ID</th>
-                  <th className="py-3.5 px-4">Full Name</th>
-                  <th className="py-3.5 px-4">Email</th>
-                  <th className="py-3.5 px-4">Phone</th>
-                  <th className="py-3.5 px-4">Enquiry Type / Subject</th>
-                  <th className="py-3.5 px-4">Status</th>
-                  <th className="py-3.5 px-4">Date</th>
-                  <th className="py-3.5 px-4 text-right">Actions</th>
+                  <th className="py-3.5 px-4">CLIENT NAME</th>
+                  <th className="py-3.5 px-4">EMAIL ADDRESS</th>
+                  <th className="py-3.5 px-4">PHONE</th>
+                  <th className="py-3.5 px-4">ENQUIRY CATEGORY</th>
+                  <th className="py-3.5 px-4">STATUS</th>
+                  <th className="py-3.5 px-4">DATE</th>
+                  <th className="py-3.5 px-4 text-right">ACTIONS</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-[#E8E8E5]">
                 {filteredEnquiries.length === 0 ? (
                   <tr>
-                    <td colSpan={8} className="py-12 text-center text-[#6B6B6B]">
-                      No contact enquiries found matching your filter criteria.
+                    <td colSpan={8} className="py-12 text-center text-[#6B6B6B] uppercase">
+                      No contact enquiries found matching your criteria.
                     </td>
                   </tr>
                 ) : (
@@ -145,25 +154,25 @@ export default function AdminEnquiriesPage() {
                     <tr
                       key={e.id}
                       className={`hover:bg-[#F7F7F5]/60 transition-colors ${
-                        e.status === "NEW" ? "bg-amber-50/40 font-semibold" : ""
+                        e.status === "NEW" ? "bg-amber-50/40 font-bold" : ""
                       }`}
                     >
-                      <td className="py-3.5 px-4 font-mono">#{e.id}</td>
-                      <td className="py-3.5 px-4 text-[#171717]">{e.name}</td>
-                      <td className="py-3.5 px-4 text-[#6B6B6B] font-mono">{e.email}</td>
-                      <td className="py-3.5 px-4 font-mono text-[#6B6B6B]">{e.phone || "N/A"}</td>
+                      <td className="py-3.5 px-4 font-bold text-[#171717]">#{e.id}</td>
+                      <td className="py-3.5 px-4 text-[#171717] font-bold">{e.name}</td>
+                      <td className="py-3.5 px-4 text-[#6B6B6B]">{e.email}</td>
+                      <td className="py-3.5 px-4 text-[#6B6B6B]">{e.phone || "N/A"}</td>
                       <td className="py-3.5 px-4 text-[#171717] max-w-xs truncate">{e.subject}</td>
                       <td className="py-3.5 px-4">
                         <select
                           value={e.status}
                           onChange={(evt) => updateStatus(e.id, evt.target.value)}
-                          className={`px-2.5 py-1 rounded-full text-[10px] font-mono font-bold uppercase border focus:outline-none ${
+                          className={`px-2.5 py-1 rounded text-[10px] font-mono font-bold uppercase border focus:outline-none cursor-pointer ${
                             e.status === "NEW"
-                              ? "bg-amber-100 text-amber-800 border-amber-300"
+                              ? "bg-amber-100 text-amber-900 border-amber-300"
                               : e.status === "READ"
-                              ? "bg-blue-100 text-blue-800 border-blue-300"
+                              ? "bg-blue-100 text-blue-900 border-blue-300"
                               : e.status === "REPLIED"
-                              ? "bg-emerald-100 text-emerald-800 border-emerald-300"
+                              ? "bg-emerald-100 text-emerald-900 border-emerald-300"
                               : "bg-[#F7F7F5] text-[#171717] border-[#E8E8E5]"
                           }`}
                         >
@@ -174,7 +183,7 @@ export default function AdminEnquiriesPage() {
                           <option value="CLOSED">CLOSED</option>
                         </select>
                       </td>
-                      <td className="py-3.5 px-4 font-mono text-[#6B6B6B]">
+                      <td className="py-3.5 px-4 text-[#6B6B6B]">
                         {e.created_at ? e.created_at.substring(0, 10) : "Today"}
                       </td>
                       <td className="py-3.5 px-4 text-right space-x-2">
@@ -183,14 +192,14 @@ export default function AdminEnquiriesPage() {
                             if (e.status === "NEW") updateStatus(e.id, "READ");
                             setSelectedEnquiry(e);
                           }}
-                          className="p-1.5 rounded-lg bg-[#F7F7F5] hover:bg-[#E8E8E5] text-[#171717] transition-colors"
-                          title="View Enquiry Details"
+                          className="p-1.5 rounded-lg bg-[#F7F7F5] hover:bg-[#171717] hover:text-white text-[#171717] transition-colors"
+                          title="Inspect Enquiry Details"
                         >
                           <Eye className="w-3.5 h-3.5" />
                         </button>
                         <button
-                          onClick={() => handleDelete(e.id)}
-                          className="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-100 text-rose-600 transition-colors"
+                          onClick={() => setDeleteId(e.id)}
+                          className="p-1.5 rounded-lg bg-rose-50 hover:bg-rose-600 hover:text-white text-rose-600 transition-colors"
                           title="Delete Enquiry"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -203,64 +212,96 @@ export default function AdminEnquiriesPage() {
             </table>
           </div>
         </div>
+
       </div>
 
-      {/* View Detail Modal */}
+      {/* DETAIL INSPECTION MODAL */}
       {selectedEnquiry && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-fade-in">
-          <div className="relative w-full max-w-xl bg-white rounded-3xl p-6 md:p-8 border border-[#E8E8E5] shadow-2xl space-y-6">
-            <button
-              onClick={() => setSelectedEnquiry(null)}
-              className="absolute top-6 right-6 p-1 text-[#6B6B6B] hover:text-[#171717]"
-            >
-              <X className="w-5 h-5" />
-            </button>
-
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-fade-in font-sans">
+          <div className="relative w-full max-w-xl bg-white rounded-3xl p-6 sm:p-8 border border-[#E8E8E5] shadow-2xl space-y-6">
+            
             <div className="flex items-center justify-between border-b border-[#E8E8E5] pb-4">
               <div>
-                <span className="text-[10px] font-mono text-[#6B6B6B] uppercase">ENQUIRY RECORD #{selectedEnquiry.id}</span>
-                <h2 className="text-xl font-bold text-[#171717]">{selectedEnquiry.subject}</h2>
+                <span className="text-[10px] font-mono text-[#6B6B6B] uppercase block">
+                  ENQUIRY RECORD #{selectedEnquiry.id}
+                </span>
+                <h2 className="text-xl font-bold text-[#171717] uppercase tracking-tight">
+                  {selectedEnquiry.subject}
+                </h2>
               </div>
-              <span className="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-mono font-bold">
-                {selectedEnquiry.status}
-              </span>
+              <button
+                onClick={() => setSelectedEnquiry(null)}
+                className="p-1.5 rounded-full hover:bg-[#F7F7F5] text-[#6B6B6B] hover:text-[#171717]"
+              >
+                <X className="w-5 h-5" />
+              </button>
             </div>
 
-            <div className="space-y-3 text-xs">
+            <div className="space-y-3 text-xs font-mono">
               <div className="flex items-center gap-3">
                 <User className="w-4 h-4 text-[#6B6B6B]" />
                 <span className="font-bold text-[#171717]">{selectedEnquiry.name}</span>
               </div>
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#6B6B6B]" />
-                <a href={`mailto:${selectedEnquiry.email}`} className="font-mono text-indigo-600 hover:underline">
+                <a href={`mailto:${selectedEnquiry.email}`} className="text-[#171717] font-bold hover:underline">
                   {selectedEnquiry.email}
                 </a>
               </div>
               {selectedEnquiry.phone && (
                 <div className="flex items-center gap-3">
                   <Phone className="w-4 h-4 text-[#6B6B6B]" />
-                  <a href={`tel:${selectedEnquiry.phone}`} className="font-mono text-[#171717] hover:underline">
+                  <a href={`tel:${selectedEnquiry.phone}`} className="text-[#171717] hover:underline">
                     {selectedEnquiry.phone}
                   </a>
                 </div>
               )}
             </div>
 
-            <div className="p-4 rounded-2xl bg-[#F7F7F5] border border-[#E8E8E5] text-xs leading-relaxed text-[#171717] whitespace-pre-wrap font-sans">
+            <div className="p-4 rounded-2xl bg-[#F7F7F5] border border-[#E8E8E5] text-xs leading-relaxed text-[#171717] whitespace-pre-wrap font-mono">
               {selectedEnquiry.message}
             </div>
 
-            <div className="flex items-center justify-between pt-4 border-t border-[#E8E8E5] text-xs">
-              <span className="text-[#6B6B6B] font-mono text-[11px]">Submitted: {selectedEnquiry.created_at}</span>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-[#E8E8E5] text-xs font-mono">
+              <span className="text-[#6B6B6B] text-[11px]">Submitted: {selectedEnquiry.created_at}</span>
               <a
                 href={`mailto:${selectedEnquiry.email}?subject=RE: ${encodeURIComponent(selectedEnquiry.subject)}`}
                 onClick={() => updateStatus(selectedEnquiry.id, "REPLIED")}
-                className="px-5 py-2 rounded-full bg-[#171717] text-white font-semibold hover:bg-[#2A2A28] inline-flex items-center gap-2"
+                className="px-6 py-2.5 rounded-full bg-[#171717] text-white font-bold uppercase hover:bg-[#2A2A28] inline-flex items-center gap-2 shadow-md"
               >
-                <Mail className="w-3.5 h-3.5" />
-                <span>Reply via Email</span>
+                <Mail className="w-4 h-4" />
+                <span>REPLY VIA EMAIL</span>
               </a>
+            </div>
+
+          </div>
+        </div>
+      )}
+
+      {/* CONFIRM DELETE DIALOG */}
+      {deleteId && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs animate-fade-in font-sans">
+          <div className="bg-white rounded-3xl p-6 sm:p-8 max-w-sm w-full border border-[#E8E8E5] shadow-2xl text-center space-y-4">
+            <div className="w-12 h-12 rounded-full bg-rose-100 text-rose-600 flex items-center justify-center mx-auto">
+              <AlertTriangle className="w-6 h-6" />
+            </div>
+            <div className="space-y-1">
+              <h3 className="text-lg font-bold text-[#171717] uppercase">DELETE ENQUIRY RECORD?</h3>
+              <p className="text-xs text-[#6B6B6B]">This action will permanently delete this client enquiry record from the database.</p>
+            </div>
+            <div className="flex items-center justify-center gap-3 pt-2">
+              <button
+                onClick={() => setDeleteId(null)}
+                className="px-5 py-2 rounded-full border border-[#E8E8E5] text-[#171717] font-mono text-xs font-bold uppercase"
+              >
+                CANCEL
+              </button>
+              <button
+                onClick={confirmDelete}
+                className="px-5 py-2 rounded-full bg-rose-600 text-white font-mono text-xs font-bold uppercase hover:bg-rose-700 shadow-md"
+              >
+                DELETE RECORD
+              </button>
             </div>
           </div>
         </div>

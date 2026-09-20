@@ -17,7 +17,7 @@ export default function AdminContentPage() {
     email: "projects@koralsdesign.com",
     career_email: "projects@koralsdesign.com",
     location_city: "Parvati, Pune, Maharashtra, India",
-    google_maps_url: "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9?g_st=ac",
+    google_maps_url: "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9",
   });
 
   const [homepageContent, setHomepageContent] = useState({
@@ -70,249 +70,291 @@ export default function AdminContentPage() {
   return (
     <AdminLayout>
       <div className="space-y-8">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-[#E8E8E5]">
+        
+        {/* Header Bar */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-6 border-b border-[#E8E8E5]">
           <div>
-            <h1 className="text-3xl font-bold text-[#171717] tracking-tight">Website Content CMS</h1>
-            <p className="text-xs text-[#6B6B6B] mt-1">
-              Centralized single-source-of-truth management for company info, homepage copy, and about details
+            <span className="text-[11px] font-mono tracking-widest text-[#6B6B6B] uppercase block mb-1">
+              06 / SITE CONTENT
+            </span>
+            <h1 className="text-3xl font-bold text-[#171717] tracking-tight uppercase">
+              WEBSITE CONTENT CMS
+            </h1>
+            <p className="text-xs font-mono text-[#6B6B6B] mt-1">
+              Centralized single-source-of-truth management for company information, homepage copy, and practice history
             </p>
           </div>
 
           {saveSuccess && (
-            <div className="flex items-center gap-2 text-xs font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full animate-fade-in">
-              <CheckCircle2 className="w-4 h-4" />
-              <span>Content Saved Successfully!</span>
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-4 py-2 rounded-full animate-fade-in uppercase">
+              <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+              <span>CONTENT SAVED SUCCESSFULLY!</span>
             </div>
           )}
         </div>
 
-        {/* Tab Buttons */}
-        <div className="flex items-center gap-2 border-b border-[#E8E8E5] pb-4">
+        {/* Tab Selector Buttons */}
+        <div className="flex flex-wrap items-center gap-2 border-b border-[#E8E8E5] pb-4 font-mono">
           <button
             onClick={() => setActiveTab("settings")}
-            className={`px-5 py-2 rounded-full text-xs font-semibold transition-all ${
+            className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase transition-all cursor-pointer ${
               activeTab === "settings"
                 ? "bg-[#171717] text-white shadow-xs"
-                : "bg-white text-[#171717] border border-[#E8E8E5]"
+                : "bg-white text-[#171717] border border-[#E8E8E5] hover:border-[#171717]"
             }`}
           >
-            Company Contact &amp; Branding
+            COMPANY CONTACT &amp; BRANDING
           </button>
           <button
             onClick={() => setActiveTab("homepage")}
-            className={`px-5 py-2 rounded-full text-xs font-semibold transition-all ${
+            className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase transition-all cursor-pointer ${
               activeTab === "homepage"
                 ? "bg-[#171717] text-white shadow-xs"
-                : "bg-white text-[#171717] border border-[#E8E8E5]"
+                : "bg-white text-[#171717] border border-[#E8E8E5] hover:border-[#171717]"
             }`}
           >
-            Homepage Content
+            HOMEPAGE COPY
           </button>
           <button
             onClick={() => setActiveTab("about")}
-            className={`px-5 py-2 rounded-full text-xs font-semibold transition-all ${
+            className={`px-5 py-2.5 rounded-full text-xs font-bold uppercase transition-all cursor-pointer ${
               activeTab === "about"
                 ? "bg-[#171717] text-white shadow-xs"
-                : "bg-white text-[#171717] border border-[#E8E8E5]"
+                : "bg-white text-[#171717] border border-[#E8E8E5] hover:border-[#171717]"
             }`}
           >
-            About &amp; History Content
+            ABOUT &amp; HISTORY CONTENT
           </button>
         </div>
 
-        {/* Tab 1: Site Settings */}
+        {/* Tab 1: Company Settings */}
         {activeTab === "settings" && (
-          <div className="bg-white rounded-3xl p-6 md:p-8 border border-[#E8E8E5] shadow-xs space-y-6 text-xs">
-            <h2 className="text-xl font-bold text-[#171717]">Company Contact Details &amp; Location</h2>
-            <p className="text-xs text-[#6B6B6B]">
-              Changes here update the header, footer, and contact page across the entire public website.
-            </p>
+          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#E8E8E5] shadow-2xs space-y-6 text-xs">
+            <div className="border-b border-[#E8E8E5] pb-4">
+              <h2 className="text-xl font-bold text-[#171717] uppercase">COMPANY CONTACT DETAILS &amp; LOCATION</h2>
+              <p className="text-xs text-[#6B6B6B] font-mono mt-1">
+                Updates saved here synchronize across the global header, footer, contact page, and admin metadata.
+              </p>
+            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <div>
-                <label className="block font-mono font-semibold uppercase mb-1">Company Display Name</label>
+                <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                  COMPANY DISPLAY NAME *
+                </label>
                 <input
                   type="text"
                   value={siteSettings.company_name}
                   onChange={(e) => setSiteSettings({ ...siteSettings, company_name: e.target.value })}
-                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
                 />
               </div>
               <div>
-                <label className="block font-mono font-semibold uppercase mb-1">Company Legal Name</label>
+                <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                  COMPANY LEGAL NAME *
+                </label>
                 <input
                   type="text"
                   value={siteSettings.company_legal_name}
                   onChange={(e) => setSiteSettings({ ...siteSettings, company_legal_name: e.target.value })}
-                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block font-mono font-semibold uppercase mb-1">Office Address (Pune)</label>
+              <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                OFFICE REGISTERED ADDRESS (PUNE) *
+              </label>
               <input
                 type="text"
                 value={siteSettings.address}
                 onChange={(e) => setSiteSettings({ ...siteSettings, address: e.target.value })}
-                className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <div>
-                <label className="block font-mono font-semibold uppercase mb-1">Office Landline</label>
+                <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                  OFFICE LANDLINE *
+                </label>
                 <input
                   type="text"
                   value={siteSettings.phone}
                   onChange={(e) => setSiteSettings({ ...siteSettings, phone: e.target.value })}
-                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] font-mono focus:outline-none focus:border-[#171717]"
                 />
               </div>
               <div>
-                <label className="block font-mono font-semibold uppercase mb-1">Mobile Contact</label>
+                <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                  MOBILE CONTACT *
+                </label>
                 <input
                   type="text"
                   value={siteSettings.mobile}
                   onChange={(e) => setSiteSettings({ ...siteSettings, mobile: e.target.value })}
-                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] font-mono focus:outline-none focus:border-[#171717]"
                 />
               </div>
               <div>
-                <label className="block font-mono font-semibold uppercase mb-1">Official Email</label>
+                <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                  OFFICIAL EMAIL *
+                </label>
                 <input
                   type="email"
                   value={siteSettings.email}
                   onChange={(e) => setSiteSettings({ ...siteSettings, email: e.target.value })}
-                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] font-mono focus:outline-none focus:border-[#171717]"
                 />
               </div>
               <div>
-                <label className="block font-mono font-semibold uppercase mb-1">Career Email</label>
+                <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                  CAREER EMAIL *
+                </label>
                 <input
                   type="email"
                   value={siteSettings.career_email}
                   onChange={(e) => setSiteSettings({ ...siteSettings, career_email: e.target.value })}
-                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                  className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] font-mono focus:outline-none focus:border-[#171717]"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block font-mono font-semibold uppercase mb-1">Exact Google Maps URL</label>
+              <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                EXACT GOOGLE MAPS URL *
+              </label>
               <input
                 type="text"
                 value={siteSettings.google_maps_url}
                 onChange={(e) => setSiteSettings({ ...siteSettings, google_maps_url: e.target.value })}
-                className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 font-mono text-xs"
+                className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 font-mono text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
               />
             </div>
 
             <div className="pt-4 border-t border-[#E8E8E5] flex justify-end">
               <button
                 onClick={() => handleSave("siteSettings")}
-                className="inline-flex items-center gap-2 bg-[#171717] text-white px-6 py-3 rounded-full text-xs font-semibold hover:bg-[#2A2A28] transition-all"
+                className="inline-flex items-center gap-2 bg-[#171717] text-white px-6 py-3 rounded-full text-xs font-mono font-bold uppercase hover:bg-[#2A2A28] transition-all shadow-md cursor-pointer"
               >
                 <Save className="w-4 h-4" />
-                <span>Save Company Details</span>
+                <span>SAVE COMPANY DETAILS</span>
               </button>
             </div>
           </div>
         )}
 
-        {/* Tab 2: Homepage */}
+        {/* Tab 2: Homepage Copy */}
         {activeTab === "homepage" && (
-          <div className="bg-white rounded-3xl p-6 md:p-8 border border-[#E8E8E5] shadow-xs space-y-6 text-xs">
-            <h2 className="text-xl font-bold text-[#171717]">Homepage Copy &amp; Positioning</h2>
+          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#E8E8E5] shadow-2xs space-y-6 text-xs">
+            <div className="border-b border-[#E8E8E5] pb-4">
+              <h2 className="text-xl font-bold text-[#171717] uppercase">HOMEPAGE COPY &amp; POSITIONING</h2>
+            </div>
 
             <div>
-              <label className="block font-mono font-semibold uppercase mb-1">Hero Eyebrow Pill</label>
+              <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                HERO EYEBROW PILL
+              </label>
               <input
                 type="text"
                 value={homepageContent.eyebrow}
                 onChange={(e) => setHomepageContent({ ...homepageContent, eyebrow: e.target.value })}
-                className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
               />
             </div>
 
             <div>
-              <label className="block font-mono font-semibold uppercase mb-1">Hero Main Title</label>
+              <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                HERO MAIN TITLE
+              </label>
               <input
                 type="text"
                 value={homepageContent.hero_title}
                 onChange={(e) => setHomepageContent({ ...homepageContent, hero_title: e.target.value })}
-                className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5"
+                className="w-full border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
               />
             </div>
 
             <div>
-              <label className="block font-mono font-semibold uppercase mb-1">Hero Subtitle</label>
+              <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                HERO SUBTITLE
+              </label>
               <textarea
                 rows={3}
                 value={homepageContent.hero_subtitle}
                 onChange={(e) => setHomepageContent({ ...homepageContent, hero_subtitle: e.target.value })}
-                className="w-full border border-[#E8E8E5] rounded-xl p-4"
+                className="w-full border border-[#E8E8E5] rounded-xl p-4 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
               />
             </div>
 
             <div className="pt-4 border-t border-[#E8E8E5] flex justify-end">
               <button
                 onClick={() => handleSave("homepage")}
-                className="inline-flex items-center gap-2 bg-[#171717] text-white px-6 py-3 rounded-full text-xs font-semibold hover:bg-[#2A2A28] transition-all"
+                className="inline-flex items-center gap-2 bg-[#171717] text-white px-6 py-3 rounded-full text-xs font-mono font-bold uppercase hover:bg-[#2A2A28] transition-all shadow-md cursor-pointer"
               >
                 <Save className="w-4 h-4" />
-                <span>Save Homepage Content</span>
+                <span>SAVE HOMEPAGE COPY</span>
               </button>
             </div>
           </div>
         )}
 
-        {/* Tab 3: About */}
+        {/* Tab 3: About Content */}
         {activeTab === "about" && (
-          <div className="bg-white rounded-3xl p-6 md:p-8 border border-[#E8E8E5] shadow-xs space-y-6 text-xs">
-            <h2 className="text-xl font-bold text-[#171717]">About Company &amp; History Content</h2>
+          <div className="bg-white rounded-2xl p-6 sm:p-8 border border-[#E8E8E5] shadow-2xs space-y-6 text-xs">
+            <div className="border-b border-[#E8E8E5] pb-4">
+              <h2 className="text-xl font-bold text-[#171717] uppercase">ABOUT COMPANY &amp; HISTORY CONTENT</h2>
+            </div>
 
             <div>
-              <label className="block font-mono font-semibold uppercase mb-1">Company Overview</label>
+              <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                COMPANY OVERVIEW
+              </label>
               <textarea
                 rows={3}
                 value={aboutContent.company_overview}
                 onChange={(e) => setAboutContent({ ...aboutContent, company_overview: e.target.value })}
-                className="w-full border border-[#E8E8E5] rounded-xl p-4"
+                className="w-full border border-[#E8E8E5] rounded-xl p-4 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
               />
             </div>
 
             <div>
-              <label className="block font-mono font-semibold uppercase mb-1">History Timeline (2005 -&gt; 2013 -&gt; 2020)</label>
+              <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                PRACTICE HISTORY TIMELINE (2005 -&gt; 2013 -&gt; 2020)
+              </label>
               <textarea
                 rows={4}
                 value={aboutContent.history_timeline}
                 onChange={(e) => setAboutContent({ ...aboutContent, history_timeline: e.target.value })}
-                className="w-full border border-[#E8E8E5] rounded-xl p-4"
+                className="w-full border border-[#E8E8E5] rounded-xl p-4 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
               />
             </div>
 
             <div>
-              <label className="block font-mono font-semibold uppercase mb-1">People &amp; Culture Statement</label>
+              <label className="block font-mono font-semibold uppercase text-[#171717] mb-1">
+                PEOPLE &amp; CULTURE STATEMENT
+              </label>
               <textarea
                 rows={3}
                 value={aboutContent.culture_statement}
                 onChange={(e) => setAboutContent({ ...aboutContent, culture_statement: e.target.value })}
-                className="w-full border border-[#E8E8E5] rounded-xl p-4"
+                className="w-full border border-[#E8E8E5] rounded-xl p-4 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
               />
             </div>
 
             <div className="pt-4 border-t border-[#E8E8E5] flex justify-end">
               <button
                 onClick={() => handleSave("about")}
-                className="inline-flex items-center gap-2 bg-[#171717] text-white px-6 py-3 rounded-full text-xs font-semibold hover:bg-[#2A2A28] transition-all"
+                className="inline-flex items-center gap-2 bg-[#171717] text-white px-6 py-3 rounded-full text-xs font-mono font-bold uppercase hover:bg-[#2A2A28] transition-all shadow-md cursor-pointer"
               >
                 <Save className="w-4 h-4" />
-                <span>Save About Content</span>
+                <span>SAVE ABOUT CONTENT</span>
               </button>
             </div>
           </div>
         )}
+
       </div>
     </AdminLayout>
   );
