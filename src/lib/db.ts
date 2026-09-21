@@ -3,21 +3,53 @@ import path from "path";
 import fs from "fs";
 import bcrypt from "bcryptjs";
 
-// Ensure data directory exists
-const dbDir = path.join(process.cwd(), "data");
-if (!fs.existsSync(dbDir)) {
-  fs.mkdirSync(dbDir, { recursive: true });
+// Check if running on Vercel or Serverless (AWS Lambda)
+const isServerless = Boolean(
+  process.env.VERCEL ||
+  process.env.AWS_LAMBDA_FUNCTION_NAME ||
+  process.env.LAMBDA_TASK_ROOT
+);
+
+let dbPath: string;
+
+if (isServerless) {
+  dbPath = path.join("/tmp", "korals_cms.db");
+  const bundledDbPath = path.join(process.cwd(), "data", "korals_cms.db");
+
+  if (!fs.existsSync(/*turbopackIgnore: true*/ dbPath)) {
+    if (fs.existsSync(bundledDbPath)) {
+      try {
+        fs.copyFileSync(bundledDbPath, dbPath);
+      } catch (err) {
+        console.error("Could not copy bundled db to /tmp:", err);
+      }
+    }
+  }
+} else {
+  const dbDir = path.join(process.cwd(), "data");
+  if (!fs.existsSync(dbDir)) {
+    try {
+      fs.mkdirSync(dbDir, { recursive: true });
+    } catch (e) {
+      console.warn("Could not create db directory:", e);
+    }
+  }
+  dbPath = path.join(dbDir, "korals_cms.db");
 }
 
-const dbPath = path.join(dbDir, "korals_cms.db");
 const db = new Database(dbPath);
 
-// Enable WAL mode for high performance concurrency
-db.pragma("journal_mode = WAL");
+try {
+  // Enable WAL mode for high performance concurrency
+  db.pragma("journal_mode = WAL");
+} catch (e) {
+  console.warn("Failed to set WAL mode (falling back):", e);
+}
 
 // Initialize Schema & Seed Data
 export function initDb() {
-  db.exec(`
+  try {
+    db.exec(`
     CREATE TABLE IF NOT EXISTS admins (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       username TEXT UNIQUE NOT NULL,
@@ -439,6 +471,9 @@ export function initDb() {
       "We are planning an expansion of our manufacturing unit in Chakan MIDC (15,000 Sq.M.). Please provide architectural planning and MPCB approval consultation.",
       "NEW"
     );
+  }
+  } catch (initErr) {
+    console.warn("Database initialization notice:", initErr);
   }
 }
 
