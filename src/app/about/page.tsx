@@ -3,6 +3,8 @@ import Footer from "@/components/Footer";
 import AboutClient from "@/components/AboutClient";
 import db from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "About Us | KORALS DESIGN PVT LTD — Architectural & Engineering Consultancy Pune",
   description:

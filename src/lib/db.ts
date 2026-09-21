@@ -146,12 +146,70 @@ export function initDb() {
       filetype TEXT,
       created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     );
+
+    CREATE TABLE IF NOT EXISTS notifications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      type TEXT NOT NULL,
+      title TEXT NOT NULL,
+      message TEXT NOT NULL,
+      data TEXT,
+      is_read INTEGER DEFAULT 0,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS career_applications (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      career_id INTEGER,
+      position TEXT NOT NULL,
+      applicant_name TEXT NOT NULL,
+      email TEXT NOT NULL,
+      phone TEXT NOT NULL,
+      portfolio_url TEXT,
+      cover_note TEXT,
+      status TEXT DEFAULT 'NEW',
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+      updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS methodology_stages (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      stage_number TEXT NOT NULL,
+      stage_code TEXT NOT NULL,
+      title TEXT NOT NULL,
+      subtitle TEXT NOT NULL,
+      description TEXT NOT NULL,
+      image TEXT,
+      display_order INTEGER DEFAULT 0,
+      is_active INTEGER DEFAULT 1
+    );
+
+    CREATE TABLE IF NOT EXISTS activity_logs (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      admin_user TEXT NOT NULL,
+      action TEXT NOT NULL,
+      entity_type TEXT NOT NULL,
+      entity_id TEXT,
+      details TEXT,
+      created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    );
+
+    CREATE TABLE IF NOT EXISTS seo_settings (
+      page_key TEXT PRIMARY KEY,
+      title TEXT NOT NULL,
+      description TEXT NOT NULL,
+      og_title TEXT,
+      og_description TEXT,
+      og_image TEXT,
+      canonical_url TEXT
+    );
   `);
 
-  // Column Migrations for Services if missing
+  // Column Migrations if missing
   try { db.exec("ALTER TABLE services ADD COLUMN slug TEXT;"); } catch {}
   try { db.exec("ALTER TABLE services ADD COLUMN cta_label TEXT;"); } catch {}
   try { db.exec("ALTER TABLE services ADD COLUMN cta_link TEXT;"); } catch {}
+  try { db.exec("ALTER TABLE enquiries ADD COLUMN company TEXT;"); } catch {}
+  try { db.exec("ALTER TABLE enquiries ADD COLUMN project_type TEXT;"); } catch {}
 
   // 1. Seed Default Admin User if not exists
   const adminCheck = db.prepare("SELECT COUNT(*) as count FROM admins").get() as { count: number };
@@ -190,21 +248,34 @@ export function initDb() {
   }
 
   // 3. Seed Default Homepage Content
-  const homeCheck = db.prepare("SELECT COUNT(*) as count FROM homepage_content").get() as { count: number };
-  if (homeCheck.count === 0) {
-    const defaultHome = [
-      ["eyebrow", "QUALITY YOU CAN TRUST"],
-      ["hero_title", "Innovating Industrial & Architectural Spaces."],
-      ["hero_subtitle", "End-to-End Solutions — Design, Approvals and Execution."],
-      ["hero_primary_cta_text", "Explore Projects"],
-      ["hero_primary_cta_link", "/projects"],
-      ["hero_secondary_cta_text", "Our Services"],
-      ["hero_secondary_cta_link", "/services"],
-    ];
-    const insertHome = db.prepare("INSERT OR IGNORE INTO homepage_content (key, value) VALUES (?, ?)");
-    for (const [k, v] of defaultHome) {
-      insertHome.run(k, v);
-    }
+  const homeKeys = [
+    ["eyebrow", "ARCHITECTURE • CIVIL ENGINEERING • PROJECT CONSULTANCY"],
+    ["hero_title", "DESIGNING SPACES."],
+    ["hero_highlighted_text", "ENGINEERING POSSIBILITIES."],
+    ["hero_subtitle", "Explore opportunities and project solutions that bring architectural design, structural engineering, and statutory project requirements together."],
+    ["hero_description", "Integrated architectural master planning, heavy industrial facility layouts, statutory approvals (MIDC, MPCB, PMRDA), and civil execution PMC based in Pune, Maharashtra."],
+    ["hero_primary_cta_text", "EXPLORE PROJECTS"],
+    ["hero_primary_cta_link", "/projects"],
+    ["hero_secondary_cta_text", "START A PROJECT"],
+    ["hero_secondary_cta_link", "/contact"],
+    ["hero_image", "/images/hero_villa_render.jpg"],
+    ["hero_image_alt", "Korals Design Architectural & Engineering Landmark Projects"],
+    ["hero_visible", "1"],
+    ["practice_section_label", "KD / 01 — PRACTICE STATEMENT"],
+    ["practice_heading", "WE DESIGN. WE ENGINEER. WE COORDINATE."],
+    ["practice_philosophy", "Korals Design Private Limited brings an integrated approach combining architectural planning, civil engineering project management, ground survey consultancy, and technical liaison with government departments across Maharashtra."],
+    ["practice_description", "Established with land surveying roots in 2005 and incorporated as Korals Design Private Limited in 2020, we manage complex industrial manufacturing facilities, corporate headquarters, commercial developments, and municipal civil infrastructure from concept through statutory clearances and site handover."],
+    ["practice_architecture_text", "Master planning, conceptual spatial design, 3D visualization, and National Building Code compliance."],
+    ["practice_engineering_text", "Civil PMC, structural coordination, quality supervision, and milestone certification."],
+    ["practice_coordination_text", "Statutory approvals, technical liaison with MIDC, MPCB, DISH, PMRDA, PMC, PCMC, and revenue authorities."],
+    ["cta_heading", "READY TO ENGINEER YOUR NEXT FACILITY?"],
+    ["cta_description", "Consult with our directors and engineering team in Pune for end-to-end architectural planning, statutory liaison, and civil execution."],
+    ["cta_button_text", "START A PROJECT"],
+    ["cta_button_url", "/contact"],
+  ];
+  const insertHome = db.prepare("INSERT OR IGNORE INTO homepage_content (key, value) VALUES (?, ?)");
+  for (const [k, v] of homeKeys) {
+    insertHome.run(k, v);
   }
 
   // 4. Seed Default About Content
@@ -379,8 +450,8 @@ export function initDb() {
         "12,274 Sq.M.",
         "Comprehensive architectural design, civil structural management, and government sanctions for Alfa Laval's manufacturing and administrative facility in Pune.",
         "2022",
-        "/images/hero_villa_render.jpg",
-        JSON.stringify(["/images/hero_villa_render.jpg", "/images/hero_villa_sketch.jpg", "/images/architecture_exterior_1.jpg"]),
+        "/images/alfa_laval_facility.png",
+        JSON.stringify(["/images/alfa_laval_facility.png", "/images/architecture_exterior_1.jpg"]),
         1,
         1,
         1
@@ -393,8 +464,8 @@ export function initDb() {
         "Multi-Acre Campus",
         "Architectural master planning, land survey, contour mapping, and statutory documentation for municipal civil infrastructure.",
         "2021",
-        "/images/concept_pavilion_1.jpg",
-        JSON.stringify(["/images/concept_pavilion_1.jpg", "/images/sketch_elevation_1.jpg"]),
+        "/images/shrirampur_municipal.jpg",
+        JSON.stringify(["/images/shrirampur_municipal.jpg", "/images/sketch_elevation_1.jpg"]),
         1,
         2,
         1
@@ -407,8 +478,8 @@ export function initDb() {
         "Corporate Campus",
         "Land survey consultancy, process flow layout planning, and technical liaison with statutory industrial departments for Suzlon Energy.",
         "2023",
-        "/images/creative_facade_1.jpg",
-        JSON.stringify(["/images/creative_facade_1.jpg", "/images/interior_lounge_1.jpg"]),
+        "/images/suzlon_energy_facility.png",
+        JSON.stringify(["/images/suzlon_energy_facility.png", "/images/interior_lounge_1.jpg"]),
         1,
         3,
         1
@@ -461,19 +532,117 @@ export function initDb() {
   const enqCheck = db.prepare("SELECT COUNT(*) as count FROM enquiries").get() as { count: number };
   if (enqCheck.count === 0) {
     db.prepare(`
-      INSERT INTO enquiries (name, email, phone, subject, message, status)
-      VALUES (?, ?, ?, ?, ?, ?)
+      INSERT INTO enquiries (name, email, phone, company, project_type, subject, message, status)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `).run(
       "Rajesh Sharma",
       "rajesh.sharma@example.com",
       "+91 9876543210",
+      "Sharma Manufacturing Pvt Ltd",
+      "Industrial Facility & MIDC Sanctions",
       "Industrial Plant Expansion Enquiry",
       "We are planning an expansion of our manufacturing unit in Chakan MIDC (15,000 Sq.M.). Please provide architectural planning and MPCB approval consultation.",
       "NEW"
     );
   }
+
+  // 10. Seed Methodology Stages if empty
+  const methodCheck = db.prepare("SELECT COUNT(*) as count FROM methodology_stages").get() as { count: number };
+  if (methodCheck.count === 0) {
+    const stages = [
+      ["01", "CONCEPT", "CONCEPT", "Site Analysis & Vision", "Topographic land survey, contour mapping, process flow analysis, and site layout feasibility study.", "/images/sketch_elevation_1.jpg", 1, 1],
+      ["02", "DESIGN", "DESIGN", "Architectural CAD & 3D", "Detailed architectural master planning, structural engineering design, CAD drafting, and 3D spatial walkthroughs.", "/images/hero_villa_sketch.jpg", 2, 1],
+      ["03", "DOCUMENTATION", "DOCUMENTATION", "Statutory File Preparation", "Comprehensive technical dossier compilation, statutory NOC checklist, and municipal building drawing preparation.", "/images/hero_villa_render.jpg", 3, 1],
+      ["04", "APPROVALS", "APPROVALS", "Government Sanctions & Liaison", "Technical department liaison and follow-up support for permissions with MIDC, MPCB, DISH, PMRDA, PMC, PCMC.", "/images/concept_pavilion_1.jpg", 4, 1],
+      ["05", "PROJECT MANAGEMENT", "PROJECT MANAGEMENT", "PMC & Quality Supervision", "Site supervision, quantity estimation, contractor tendering, milestone tracking, and invoice certification.", "/images/creative_facade_1.jpg", 5, 1],
+      ["06", "EXECUTION", "EXECUTION", "Facility Handover & As-Built", "Final structural compliance inspection, third-party quality verification, and operational facility handover.", "/images/architecture_exterior_1.jpg", 6, 1],
+    ];
+    const insertStage = db.prepare(`
+      INSERT INTO methodology_stages (stage_number, stage_code, title, subtitle, description, image, display_order, is_active)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    `);
+    for (const s of stages) {
+      insertStage.run(...s);
+    }
+  }
+
+  // 11. Seed SEO Settings if empty
+  const seoCheck = db.prepare("SELECT COUNT(*) as count FROM seo_settings").get() as { count: number };
+  if (seoCheck.count === 0) {
+    const seoEntries = [
+      ["home", "Korals Design Private Limited — Architectural & Civil Engineering Consultancy Pune", "Architectural planning, civil engineering project management, statutory government approvals, land surveying, and 3D spatial visualization in Pune, Maharashtra.", "Korals Design Private Limited — Architectural & Civil Engineering Consultancy", "Architectural planning, civil engineering project management, statutory approvals in Pune.", "/images/hero_villa_render.jpg", "https://www.koralsdesign.com"],
+      ["about", "About Us | Korals Design Private Limited — 20+ Years Practice Legacy", "Learn about Korals Design leadership, directors Mahesh Govardhan and Uday Honap, and our evolution from land surveying in 2005 to full-service architectural PMC.", "About Korals Design Private Limited", "Two decades of verified architectural, surveying, and civil engineering practice.", "/images/concept_pavilion_1.jpg", "https://www.koralsdesign.com/about"],
+      ["projects", "Projects Portfolio | Korals Design — Industrial, Commercial & Municipal Landmark Projects", "Explore featured industrial facilities, corporate headquarters, and municipal infrastructure projects executed by Korals Design in Pune and across Maharashtra.", "Korals Design Practice Portfolio", "Featured architectural, engineering, and municipal projects in Pune.", "/images/hero_villa_render.jpg", "https://www.koralsdesign.com/projects"],
+      ["services", "Specialized Services | Korals Design — Architecture, Sanctions & PMC", "8 integrated architectural and engineering disciplines: Architectural Design, Sanctions & Approvals, Land Survey, PMC, Industrial Planning, Corporate Interiors, 3D Visualization.", "Korals Design Core Services", "Integrated architecture, government approvals, land surveying, and project management.", "/images/creative_facade_1.jpg", "https://www.koralsdesign.com/services"],
+      ["careers", "Careers at Korals Design | Engineering & Architecture Opportunities Pune", "Join Korals Design Private Limited. Explore job openings in construction safety management, architectural drafting, site civil engineering, and government liaison.", "Careers at Korals Design", "Explore professional architectural and civil engineering opportunities in Pune.", "/images/architecture_exterior_1.jpg", "https://www.koralsdesign.com/careers"],
+      ["contact", "Contact Korals Design | Pune Corporate Office & Project Inquiries", "Connect with Korals Design Private Limited at 201 Laxmi Narayan, CTS No. 256B/5, Parvati, Pune. Call +91 9822864648 or submit a project consultation enquiry.", "Contact Korals Design Private Limited", "Corporate office in Parvati, Pune, Maharashtra. Start your architectural project.", "/images/interior_lounge_1.jpg", "https://www.koralsdesign.com/contact"],
+    ];
+    const insertSeo = db.prepare(`
+      INSERT INTO seo_settings (page_key, title, description, og_title, og_description, og_image, canonical_url)
+      VALUES (?, ?, ?, ?, ?, ?, ?)
+    `);
+    for (const se of seoEntries) {
+      insertSeo.run(...se);
+    }
+  }
+
+  // 12. Seed Sample Notification if empty
+  const notifCheck = db.prepare("SELECT COUNT(*) as count FROM notifications").get() as { count: number };
+  if (notifCheck.count === 0) {
+    db.prepare(`
+      INSERT INTO notifications (type, title, message, data, is_read)
+      VALUES (?, ?, ?, ?, ?)
+    `).run(
+      "ENQUIRY",
+      "New Business Enquiry",
+      "Rajesh Sharma submitted an inquiry: Industrial Plant Expansion Enquiry (Chakan MIDC)",
+      JSON.stringify({
+        name: "Rajesh Sharma",
+        email: "rajesh.sharma@example.com",
+        phone: "+91 9876543210",
+        company: "Sharma Manufacturing Pvt Ltd",
+        project_type: "Industrial Facility & MIDC Sanctions",
+      }),
+      0
+    );
+  }
   } catch (initErr) {
     console.warn("Database initialization notice:", initErr);
+  }
+}
+
+// Helper function to create notification
+export function createNotification(type: string, title: string, message: string, data?: unknown) {
+  try {
+    const dataStr = data ? JSON.stringify(data) : null;
+    const stmt = db.prepare(`
+      INSERT INTO notifications (type, title, message, data, is_read)
+      VALUES (?, ?, ?, ?, 0)
+    `);
+    return stmt.run(type, title, message, dataStr);
+  } catch (e) {
+    console.error("Failed to create notification:", e);
+    return null;
+  }
+}
+
+// Helper function to log admin activity
+export function logActivity(
+  adminUser: string,
+  action: string,
+  entityType: string,
+  entityId?: string | number | bigint,
+  details?: string
+) {
+  try {
+    const stmt = db.prepare(`
+      INSERT INTO activity_logs (admin_user, action, entity_type, entity_id, details)
+      VALUES (?, ?, ?, ?, ?)
+    `);
+    return stmt.run(adminUser, action, entityType, entityId !== undefined ? entityId.toString() : null, details || null);
+  } catch (e) {
+    console.error("Failed to log activity:", e);
+    return null;
   }
 }
 

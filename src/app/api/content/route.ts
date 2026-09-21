@@ -54,6 +54,11 @@ export async function POST(req: Request) {
       stmt.run(key, String(value));
     }
 
+    try {
+      const { logActivity } = await import("@/lib/db");
+      logActivity("Admin", "UPDATE_CONTENT", section, undefined, `Updated ${Object.keys(data).length} fields in ${section}`);
+    } catch {}
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Content POST error:", error);

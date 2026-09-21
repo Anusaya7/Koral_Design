@@ -36,14 +36,14 @@ export default function Navbar() {
   ];
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (href === "/" && pathname === "/") {
+    if (href === pathname) {
       e.preventDefault();
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   };
 
-  // Determine logo source based on mode and scroll state
-  const isDarkVisual = theme === "dark" || (!scrolled && pathname === "/");
+  // Determine logo source based on mode and scroll state across all public pages
+  const isDarkVisual = theme === "dark" || !scrolled;
   const logoSrc = isDarkVisual
     ? "/images/logo/korals_logo_white.svg"
     : "/images/logo/korals_logo.svg";
@@ -82,7 +82,7 @@ export default function Navbar() {
         <nav className="hidden lg:flex items-center gap-6 xl:gap-8">
           {navLinks.map((item) => {
             const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href));
-            const isDarkNav = theme === "dark" || (!scrolled && pathname === "/");
+            const isDarkNav = theme === "dark" || !scrolled;
             return (
               <Link
                 key={item.label}
@@ -121,7 +121,7 @@ export default function Navbar() {
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             title={theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode"}
             className={`h-9 px-3 rounded-xl border flex items-center justify-center gap-1.5 text-xs font-mono tracking-wider transition-all duration-200 cursor-pointer ${
-              theme === "dark" || (!scrolled && pathname === "/")
+              theme === "dark" || !scrolled
                 ? "bg-white/10 hover:bg-white/20 border-white/20 text-white"
                 : "bg-[#F7F7F5] hover:bg-[#E8E8E5] border-[#E8E8E5] text-[#171717]"
             }`}
@@ -148,7 +148,7 @@ export default function Navbar() {
                 : "bg-white text-[#171717] hover:bg-[#F0F0ED] border border-white/40"
             }`}
           >
-            <span>GET IN TOUCH</span>
+            <span>START A PROJECT</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
           </Link>
 
@@ -162,7 +162,7 @@ export default function Navbar() {
             onClick={toggleTheme}
             aria-label={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             className={`p-2 rounded-xl border transition-colors ${
-              theme === "dark" || (!scrolled && pathname === "/")
+              theme === "dark" || !scrolled
                 ? "bg-white/10 border-white/20 text-white"
                 : "bg-[#F7F7F5] border-[#E8E8E5] text-[#171717]"
             }`}
@@ -177,12 +177,14 @@ export default function Navbar() {
           {/* Hamburger Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation-menu"
             className={`p-2 rounded-xl transition-colors ${
               scrolled && theme === "light"
                 ? "text-[#171717] hover:bg-[#E8E8E5]/50"
                 : "text-white hover:bg-white/10"
             }`}
-            aria-label="Toggle Navigation Menu"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -192,7 +194,9 @@ export default function Navbar() {
 
       {/* Mobile Navigation Drawer Overlay */}
       {mobileMenuOpen && (
-        <div className={`lg:hidden fixed inset-x-0 top-[65px] px-6 py-6 shadow-xl animate-fade-in z-50 border-b transition-colors ${
+        <div
+          id="mobile-navigation-menu"
+          className={`lg:hidden fixed inset-x-0 top-[65px] px-6 py-6 shadow-xl animate-fade-in z-50 border-b transition-colors ${
           theme === "dark"
             ? "bg-[#181818] border-[#2A2A28] text-white"
             : "bg-[#F7F7F5] border-[#E8E8E5] text-[#171717]"
@@ -224,11 +228,17 @@ export default function Navbar() {
             })}
 
             {/* Mobile Theme Mode Row */}
-            <div className="flex items-center justify-between py-3 border-b border-white/10 font-mono text-xs">
+            <div className={`flex items-center justify-between py-3 border-b font-mono text-xs ${
+              theme === "dark" ? "border-white/10" : "border-[#E8E8E5]"
+            }`}>
               <span className="uppercase opacity-70">DESIGN SYSTEM MODE</span>
               <button
                 onClick={toggleTheme}
-                className="px-3 py-1.5 rounded-lg bg-white/10 border border-white/20 text-xs font-mono font-bold uppercase flex items-center gap-1.5"
+                className={`px-3 py-1.5 rounded-lg border text-xs font-mono font-bold uppercase flex items-center gap-1.5 ${
+                  theme === "dark"
+                    ? "bg-white/10 border-white/20 text-white"
+                    : "bg-[#E8E8E5] border-[#D0D0CD] text-[#171717]"
+                }`}
               >
                 {theme === "dark" ? (
                   <>
@@ -251,7 +261,7 @@ export default function Navbar() {
                 className="w-full text-center py-3 text-xs font-mono font-bold tracking-wider uppercase bg-[#171717] text-white dark:bg-white dark:text-[#171717] rounded-xl flex items-center justify-center gap-2 shadow-md"
               >
                 <ShieldCheck className="w-4 h-4 text-emerald-400" />
-                <span>START AN ENQUIRY</span>
+                <span>START A PROJECT</span>
               </Link>
             </div>
           </div>

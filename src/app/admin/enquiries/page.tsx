@@ -9,6 +9,8 @@ interface Enquiry {
   name: string;
   email: string;
   phone: string;
+  company?: string;
+  project_type?: string;
   subject: string;
   message: string;
   status: string;
@@ -158,10 +160,15 @@ export default function AdminEnquiriesPage() {
                       }`}
                     >
                       <td className="py-3.5 px-4 font-bold text-[#171717]">#{e.id}</td>
-                      <td className="py-3.5 px-4 text-[#171717] font-bold">{e.name}</td>
+                      <td className="py-3.5 px-4 text-[#171717]">
+                        <div className="font-bold">{e.name}</div>
+                        {e.company && <div className="text-[10px] text-[#6B6B6B]">{e.company}</div>}
+                      </td>
                       <td className="py-3.5 px-4 text-[#6B6B6B]">{e.email}</td>
                       <td className="py-3.5 px-4 text-[#6B6B6B]">{e.phone || "N/A"}</td>
-                      <td className="py-3.5 px-4 text-[#171717] max-w-xs truncate">{e.subject}</td>
+                      <td className="py-3.5 px-4 text-[#171717]">
+                        <span className="font-semibold">{e.project_type || e.subject}</span>
+                      </td>
                       <td className="py-3.5 px-4">
                         <select
                           value={e.status}
@@ -241,7 +248,16 @@ export default function AdminEnquiriesPage() {
               <div className="flex items-center gap-3">
                 <User className="w-4 h-4 text-[#6B6B6B]" />
                 <span className="font-bold text-[#171717]">{selectedEnquiry.name}</span>
+                {selectedEnquiry.company && (
+                  <span className="text-[#6B6B6B]">({selectedEnquiry.company})</span>
+                )}
               </div>
+              {selectedEnquiry.project_type && (
+                <div className="text-[11px] text-[#171717]">
+                  <span className="text-[#6B6B6B]">Project Scope: </span>
+                  <span className="font-bold">{selectedEnquiry.project_type}</span>
+                </div>
+              )}
               <div className="flex items-center gap-3">
                 <Mail className="w-4 h-4 text-[#6B6B6B]" />
                 <a href={`mailto:${selectedEnquiry.email}`} className="text-[#171717] font-bold hover:underline">

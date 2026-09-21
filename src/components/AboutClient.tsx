@@ -130,21 +130,21 @@ export default function AboutClient({ initialLeadership }: AboutClientProps) {
       name: "ALFA LAVAL INDIA LTD",
       type: "Industrial Building (12,274 Sq.M.)",
       location: "Kasarwadi, Bhosari, Pune",
-      image: "/images/architecture_exterior_1.jpg",
+      image: "/images/alfa_laval_facility.png",
     },
     {
       id: "shrirampur",
       name: "SHRIRAMPUR MUNICIPAL CORP",
       type: "Institutional Masterplan & Survey",
       location: "Shrirampur, Maharashtra",
-      image: "/images/hero_villa_render.jpg",
+      image: "/images/shrirampur_municipal.jpg",
     },
     {
       id: "suzlon",
       name: "SUZLON ENERGY FACILITY",
       type: "Green Energy Campus Planning",
       location: "Pune, Maharashtra",
-      image: "/images/interior_lounge_1.jpg",
+      image: "/images/suzlon_energy_facility.png",
     },
   ];
 

@@ -18,16 +18,36 @@ import {
   ShieldCheck,
   ChevronRight,
   ExternalLink,
+  Bell,
+  CheckCheck,
+  Settings,
+  Globe,
+  Activity,
+  Compass,
+  Users,
 } from "lucide-react";
 
 interface AdminLayoutProps {
   children: React.ReactNode;
 }
 
+interface NotificationItem {
+  id: number;
+  type: string;
+  title: string;
+  message: string;
+  link: string | null;
+  is_read: number;
+  created_at: string;
+}
+
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const [authenticated, setAuthenticated] = useState<boolean | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [username, setUsername] = useState("Admin");
+  const [notifications, setNotifications] = useState<NotificationItem[]>([]);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [showNotifications, setShowNotifications] = useState(false);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -46,6 +66,37 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
         setAuthenticated(false);
       });
   }, [pathname]);
+
+  const loadNotifications = () => {
+    fetch("/api/notifications?limit=5")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && Array.isArray(data.notifications)) {
+          setNotifications(data.notifications);
+          setUnreadCount(data.unreadCount || 0);
+        }
+      })
+      .catch(() => {});
+  };
+
+  useEffect(() => {
+    if (authenticated) {
+      loadNotifications();
+      const interval = setInterval(loadNotifications, 15000); // Check every 15s
+      return () => clearInterval(interval);
+    }
+  }, [authenticated]);
+
+  const handleMarkAllRead = async () => {
+    try {
+      await fetch("/api/notifications", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ all: true }),
+      });
+      loadNotifications();
+    } catch {}
+  };
 
   const handleLogout = async () => {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -77,24 +128,31 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
       ],
     },
     {
-      group: "CONTENT",
+      group: "CONTENT & PAGES",
       items: [
-        { label: "Projects", href: "/admin/projects", icon: Building2, tag: "02" },
-        { label: "Services", href: "/admin/services", icon: Layers, tag: "03" },
-        { label: "Careers", href: "/admin/careers", icon: Briefcase, tag: "04" },
+        { label: "Home Page", href: "/admin/home", icon: FileText, tag: "02" },
+        { label: "About Practice", href: "/admin/about", icon: FileText, tag: "03" },
+        { label: "Projects", href: "/admin/projects", icon: Building2, tag: "04" },
+        { label: "Services", href: "/admin/services", icon: Layers, tag: "05" },
+        { label: "Methodology", href: "/admin/methodology", icon: Compass, tag: "06" },
+        { label: "Careers", href: "/admin/careers", icon: Briefcase, tag: "07" },
       ],
     },
     {
       group: "COMMUNICATION",
       items: [
-        { label: "Enquiries", href: "/admin/enquiries", icon: Mail, tag: "05" },
+        { label: "Enquiries", href: "/admin/enquiries", icon: Mail, tag: "08" },
+        { label: "Applications", href: "/admin/applications", icon: Users, tag: "09" },
+        { label: "Notifications", href: "/admin/notifications", icon: Bell, tag: "10" },
       ],
     },
     {
-      group: "SYSTEM",
+      group: "PRACTICE SETTINGS",
       items: [
-        { label: "Site Content", href: "/admin/content", icon: FileText, tag: "06" },
-        { label: "Media Library", href: "/admin/media", icon: ImageIcon, tag: "07" },
+        { label: "SEO Settings", href: "/admin/seo", icon: Globe, tag: "11" },
+        { label: "Site Settings", href: "/admin/settings", icon: Settings, tag: "12" },
+        { label: "Activity Log", href: "/admin/activity", icon: Activity, tag: "13" },
+        { label: "Media Library", href: "/admin/media", icon: ImageIcon, tag: "14" },
       ],
     },
   ];
@@ -102,12 +160,19 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
   // Helper function to derive page title
   const getPageTitle = () => {
     if (pathname === "/admin") return { num: "01", title: "DASHBOARD OVERVIEW" };
-    if (pathname.startsWith("/admin/projects")) return { num: "02", title: "PROJECT PORTFOLIO MANAGEMENT" };
-    if (pathname.startsWith("/admin/services")) return { num: "03", title: "SERVICES PRACTICE MANAGEMENT" };
-    if (pathname.startsWith("/admin/careers")) return { num: "04", title: "CAREERS & OPEN POSITIONS" };
-    if (pathname.startsWith("/admin/enquiries")) return { num: "05", title: "CLIENT ENQUIRIES DATABASE" };
-    if (pathname.startsWith("/admin/content")) return { num: "06", title: "WEBSITE CONTENT CMS" };
-    if (pathname.startsWith("/admin/media")) return { num: "07", title: "MEDIA LIBRARY & ASSETS" };
+    if (pathname.startsWith("/admin/home")) return { num: "02", title: "HOMEPAGE CMS MANAGEMENT" };
+    if (pathname.startsWith("/admin/about")) return { num: "03", title: "ABOUT PRACTICE CONTENT CMS" };
+    if (pathname.startsWith("/admin/projects")) return { num: "04", title: "PROJECT PORTFOLIO MANAGEMENT" };
+    if (pathname.startsWith("/admin/services")) return { num: "05", title: "SERVICES PRACTICE MANAGEMENT" };
+    if (pathname.startsWith("/admin/methodology")) return { num: "06", title: "METHODOLOGY 6-STAGE WORKFLOW" };
+    if (pathname.startsWith("/admin/careers")) return { num: "07", title: "CAREERS & OPEN POSITIONS" };
+    if (pathname.startsWith("/admin/enquiries")) return { num: "08", title: "CLIENT ENQUIRIES DATABASE" };
+    if (pathname.startsWith("/admin/applications")) return { num: "09", title: "CAREER APPLICANTS REVIEW" };
+    if (pathname.startsWith("/admin/notifications")) return { num: "10", title: "NOTIFICATION ALERTS CENTER" };
+    if (pathname.startsWith("/admin/seo")) return { num: "11", title: "PRACTICE SEO METADATA" };
+    if (pathname.startsWith("/admin/settings")) return { num: "12", title: "PRACTICE CONTACT & MAPS SETTINGS" };
+    if (pathname.startsWith("/admin/activity")) return { num: "13", title: "SYSTEM AUDIT & ACTIVITY LOG" };
+    if (pathname.startsWith("/admin/media")) return { num: "14", title: "MEDIA LIBRARY & ASSETS" };
     return { num: "00", title: "PRACTICE CONTROL CENTER" };
   };
 
@@ -265,6 +330,90 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
           </div>
 
           <div className="flex items-center gap-4">
+            {/* Notification Bell with Dropdown */}
+            <div className="relative">
+              <button
+                onClick={() => setShowNotifications(!showNotifications)}
+                className="relative p-2 rounded-full hover:bg-[#F7F7F5] border border-[#E8E8E5] text-[#171717] transition-colors"
+                title="Practice Notifications"
+                aria-label="Toggle notifications"
+              >
+                <Bell className="w-4 h-4" />
+                {unreadCount > 0 && (
+                  <span className="absolute -top-1 -right-1 bg-rose-600 text-white font-mono text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center animate-pulse">
+                    {unreadCount > 9 ? "9+" : unreadCount}
+                  </span>
+                )}
+              </button>
+
+              {showNotifications && (
+                <div className="absolute right-0 mt-3 w-80 sm:w-96 bg-white rounded-2xl shadow-2xl border border-[#E8E8E5] z-50 overflow-hidden animate-fade-in font-sans">
+                  <div className="p-4 border-b border-[#E8E8E5] flex items-center justify-between bg-[#F7F7F5]">
+                    <div className="flex items-center gap-2">
+                      <Bell className="w-4 h-4 text-[#171717]" />
+                      <span className="text-xs font-mono font-bold text-[#171717] uppercase">Notifications</span>
+                      {unreadCount > 0 && (
+                        <span className="text-[10px] font-mono bg-rose-100 text-rose-800 px-1.5 py-0.5 rounded font-bold">
+                          {unreadCount} new
+                        </span>
+                      )}
+                    </div>
+                    {unreadCount > 0 && (
+                      <button
+                        onClick={handleMarkAllRead}
+                        className="text-[10px] font-mono text-[#171717] hover:underline flex items-center gap-1 font-semibold"
+                      >
+                        <CheckCheck className="w-3 h-3" />
+                        <span>Mark all read</span>
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="max-h-80 overflow-y-auto divide-y divide-[#E8E8E5]">
+                    {notifications.length === 0 ? (
+                      <div className="p-6 text-center text-xs font-mono text-[#6B6B6B]">
+                        No notifications logged.
+                      </div>
+                    ) : (
+                      notifications.map((n) => (
+                        <Link
+                          key={n.id}
+                          href={n.link || "/admin/notifications"}
+                          onClick={() => setShowNotifications(false)}
+                          className={`block p-4 hover:bg-[#F7F7F5] transition-colors ${
+                            !n.is_read ? "bg-amber-50/40" : ""
+                          }`}
+                        >
+                          <div className="flex items-start justify-between gap-2">
+                            <h4 className="text-xs font-bold text-[#171717] font-mono">{n.title}</h4>
+                            {!n.is_read && (
+                              <span className="w-2 h-2 rounded-full bg-rose-500 shrink-0 mt-1" />
+                            )}
+                          </div>
+                          <p className="text-[11px] text-[#6B6B6B] line-clamp-2 mt-1 font-sans">
+                            {n.message}
+                          </p>
+                          <span className="text-[9px] font-mono text-[#6B6B6B] block mt-1.5">
+                            {n.created_at ? new Date(n.created_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : "Just now"}
+                          </span>
+                        </Link>
+                      ))
+                    )}
+                  </div>
+
+                  <div className="p-3 bg-[#F7F7F5] border-t border-[#E8E8E5] text-center">
+                    <Link
+                      href="/admin/notifications"
+                      onClick={() => setShowNotifications(false)}
+                      className="text-xs font-mono font-bold text-[#171717] hover:underline uppercase"
+                    >
+                      View All Notifications →
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
             <a
               href="/"
               target="_blank"
@@ -433,7 +582,10 @@ function AdminLoginScreen({ onLoginSuccess }: { onLoginSuccess: () => void }) {
           </form>
 
           <div className="text-center text-[10px] font-mono text-white/40 pt-4 border-t border-white/10 space-y-1">
-            <p>201, Laxmi Narayan, Parvati, Pune - 411030</p>
+            <div className="px-3 py-1.5 rounded-lg bg-amber-500/10 border border-amber-500/20 text-amber-300 text-[10px]">
+              Development Session: <span className="font-bold text-white">admin / admin123</span> (Local Only)
+            </div>
+            <p className="pt-1">201, Laxmi Narayan, Parvati, Pune - 411030</p>
             <p>Direct: +020 - 24324648 | projects@koralsdesign.com</p>
           </div>
 

@@ -3,7 +3,22 @@
 import Link from "next/link";
 import { ArrowRight, Phone, Mail } from "lucide-react";
 
-export default function HomeContactCTA() {
+interface HomeContactCTAProps {
+  content?: Record<string, string>;
+  settings?: Record<string, string>;
+}
+
+export default function HomeContactCTA({ content = {}, settings = {} }: HomeContactCTAProps) {
+  const ctaHeading = content.cta_heading || "LET'S BUILD WHAT'S NEXT.";
+  const ctaDescription = content.cta_description || "Discuss your next architectural, engineering or industrial project with Korals Design.";
+  const ctaButtonText = content.cta_button_text || "START A CONVERSATION →";
+  const ctaButtonUrl = content.cta_button_url || "/contact";
+
+  const address = settings.address || "201, Laxmi Narayan, CTS No. 256B/5, Parvati, Pune - 411030";
+  const phone = settings.phone || "+020 - 24324648";
+  const mobile = settings.mobile || "+91 9822864648";
+  const email = settings.email || "projects@koralsdesign.com";
+
   return (
     <section id="contact-section" className="py-24 md:py-36 bg-[#FFFFFF]">
       <div className="max-w-7xl mx-auto px-6 md:px-12">
@@ -27,20 +42,28 @@ export default function HomeContactCTA() {
             </span>
 
             <h2 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight leading-[1.02]">
-              LET&apos;S BUILD <br />
-              <span className="italic font-serif font-normal text-white/80">WHAT&apos;S NEXT.</span>
+              {ctaHeading.includes(" ") ? (
+                <>
+                  {ctaHeading.split(" ").slice(0, 2).join(" ")} <br />
+                  <span className="italic font-serif font-normal text-white/80">
+                    {ctaHeading.split(" ").slice(2).join(" ") || "WHAT'S NEXT."}
+                  </span>
+                </>
+              ) : (
+                ctaHeading
+              )}
             </h2>
 
             <p className="text-base sm:text-xl text-white/80 font-normal leading-relaxed">
-              Discuss your next architectural, engineering or industrial project with Koral&apos;s Design.
+              {ctaDescription}
             </p>
 
             <div className="pt-4">
               <Link
-                href="/contact"
+                href={ctaButtonUrl}
                 className="inline-flex items-center gap-3 text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#171717] px-9 py-4 rounded-full hover:bg-white/90 transition-all shadow-xl hover:shadow-2xl"
               >
-                <span>START A CONVERSATION →</span>
+                <span>{ctaButtonText}</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
@@ -49,28 +72,27 @@ export default function HomeContactCTA() {
             <div className="pt-10 border-t border-white/15 grid grid-cols-1 sm:grid-cols-3 gap-6 text-xs font-mono text-white/90">
               <div className="space-y-1">
                 <span className="text-white/50 block text-[10px] uppercase">ADDRESS</span>
-                <p className="font-sans text-[#FFFFFF] leading-snug">201, Laxmi Narayan, CTS No. 256B/5, Parvati, Pune - 411030</p>
+                <p className="font-sans text-[#FFFFFF] leading-snug">{address}</p>
               </div>
 
               <div className="space-y-1">
                 <span className="text-white/50 block text-[10px] uppercase">PHONE &amp; MOBILE</span>
                 <div className="space-y-0.5">
-                  <a href="tel:+02024324648" className="hover:underline block flex items-center gap-1.5">
+                  <a href={`tel:${phone.replace(/[^0-9+]/g, '')}`} className="hover:underline flex items-center gap-1.5">
                     <Phone className="w-3 h-3 text-emerald-400" />
-                    <span>+020 - 24324648</span>
+                    <span>{phone}</span>
                   </a>
-                  <a href="tel:+919822864648" className="hover:underline block flex items-center gap-1.5">
-                    <Phone className="w-3 h-3 text-emerald-400" />
-                    <span>+91 9822864648</span>
+                  <a href={`tel:${mobile.replace(/[^0-9+]/g, '')}`} className="hover:underline flex items-center gap-1.5 text-white/70">
+                    <span>{mobile}</span>
                   </a>
                 </div>
               </div>
 
               <div className="space-y-1">
-                <span className="text-white/50 block text-[10px] uppercase">EMAIL</span>
-                <a href="mailto:projects@koralsdesign.com" className="font-bold hover:underline block flex items-center gap-1.5 text-white">
+                <span className="text-white/50 block text-[10px] uppercase">DIRECT INQUIRIES</span>
+                <a href={`mailto:${email}`} className="hover:underline flex items-center gap-1.5">
                   <Mail className="w-3 h-3 text-emerald-400" />
-                  <span>projects@koralsdesign.com</span>
+                  <span>{email}</span>
                 </a>
               </div>
             </div>

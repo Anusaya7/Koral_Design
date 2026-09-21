@@ -31,10 +31,13 @@ interface CareersClientProps {
 export default function CareersClient({ initialCareers = [] }: CareersClientProps) {
   const [selectedJob, setSelectedJob] = useState<CareerItem | null>(null);
   const [applicationSent, setApplicationSent] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [formData, setFormData] = useState({
     applicantName: "",
     applicantEmail: "",
     applicantPhone: "",
+    portfolioUrl: "",
     coverNote: "",
   });
 
@@ -48,18 +51,39 @@ export default function CareersClient({ initialCareers = [] }: CareersClientProp
     google_maps_url: "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9?g_st=ac",
   };
 
-  const handleApplySubmit = (e: React.FormEvent) => {
+  const handleApplySubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!selectedJob) return;
     
-    // Construct direct mailto with form data
-    const subject = encodeURIComponent(`Application for ${selectedJob.title} — ${formData.applicantName}`);
-    const body = encodeURIComponent(
-      `Name: ${formData.applicantName}\nEmail: ${formData.applicantEmail}\nPhone: ${formData.applicantPhone}\nPosition: ${selectedJob.title}\n\nCover Note:\n${formData.coverNote}\n\n(Please attach your CV/Resume to this email.)`
-    );
-    
-    window.location.href = `mailto:${selectedJob.application_email || siteSettings.email}?subject=${subject}&body=${body}`;
-    setApplicationSent(true);
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const res = await fetch("/api/applications", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          career_id: selectedJob.id,
+          applicant_name: formData.applicantName,
+          applicant_email: formData.applicantEmail,
+          applicant_phone: formData.applicantPhone,
+          portfolio_url: formData.portfolioUrl || null,
+          cover_note: formData.coverNote || null,
+        }),
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to submit application");
+      }
+
+      setApplicationSent(true);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Error submitting application. Please try again or email us directly.";
+      setSubmitError(message);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -395,7 +419,7 @@ export default function CareersClient({ initialCareers = [] }: CareersClientProp
 
           <div className="bg-white rounded-3xl p-8 border border-[#E8E8E5] shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#181818]">
-              <Image src="/images/architecture_exterior_1.jpg" alt="Alfa Laval Industrial Facility" fill className="object-cover" />
+              <Image src="/images/alfa_laval_facility.png" alt="Alfa Laval Industrial Facility" fill className="object-cover" />
             </div>
 
             <div className="lg:col-span-5 space-y-4 font-mono">
@@ -594,20 +618,43 @@ export default function CareersClient({ initialCareers = [] }: CareersClientProp
 
             {applicationSent ? (
               <div className="text-center py-8 space-y-4">
-                <CheckCircle2 className="w-12 h-12 text-emerald-600 mx-auto" />
-                <h4 className="text-2xl font-bold text-[#171717]">Application Email Prepared</h4>
-                <p className="text-xs text-[#6B6B6B] leading-relaxed max-w-md mx-auto">
-                  Your email client has been opened with the application details for <strong>{selectedJob.title}</strong>. Please attach your CV/Resume to the email before sending it to <strong>{selectedJob.application_email || siteSettings.email}</strong>.
+                <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mx-auto">
+                  <CheckCircle2 className="w-9 h-9" />
+                </div>
+                <h4 className="text-2xl font-bold text-[#171717]">Application Received</h4>
+                <p className="text-xs text-[#6B6B6B] leading-relaxed max-w-md mx-auto font-sans">
+                  Thank you, <strong>{formData.applicantName}</strong>. Your application for <strong>{selectedJob.title}</strong> has been logged in our internal recruitment system.
                 </p>
+                <div className="p-4 bg-[#F7F7F5] rounded-2xl border border-[#E8E8E5] text-left max-w-md mx-auto space-y-2 text-xs font-mono">
+                  <p className="text-[#171717] font-bold">Have a detailed CV or drawings portfolio?</p>
+                  <p className="text-[#6B6B6B]">
+                    You may optionally email your PDF portfolio directly to{" "}
+                    <a
+                      href={`mailto:${selectedJob.application_email || siteSettings.email}?subject=${encodeURIComponent(`Portfolio Attachment — ${formData.applicantName} (${selectedJob.title})`)}`}
+                      className="text-[#171717] font-bold underline"
+                    >
+                      {selectedJob.application_email || siteSettings.email}
+                    </a>.
+                  </p>
+                </div>
                 <button
-                  onClick={() => setSelectedJob(null)}
-                  className="px-6 py-2.5 bg-[#171717] text-white rounded-full text-xs font-mono font-bold uppercase"
+                  onClick={() => {
+                    setSelectedJob(null);
+                    setFormData({ applicantName: "", applicantEmail: "", applicantPhone: "", portfolioUrl: "", coverNote: "" });
+                  }}
+                  className="px-8 py-3 bg-[#171717] text-white rounded-full text-xs font-mono font-bold uppercase hover:bg-[#2A2A28] transition-all"
                 >
-                  CLOSE
+                  DONE
                 </button>
               </div>
             ) : (
               <form onSubmit={handleApplySubmit} className="space-y-4">
+                {submitError && (
+                  <div className="p-3 bg-red-50 text-red-700 text-xs rounded-xl border border-red-200">
+                    {submitError}
+                  </div>
+                )}
+
                 <div className="space-y-1">
                   <label className="text-xs font-mono font-bold text-[#171717] uppercase block">Your Full Name *</label>
                   <input
@@ -647,10 +694,21 @@ export default function CareersClient({ initialCareers = [] }: CareersClientProp
                 </div>
 
                 <div className="space-y-1">
-                  <label className="text-xs font-mono font-bold text-[#171717] uppercase block">Cover Note / Message</label>
+                  <label className="text-xs font-mono font-bold text-[#171717] uppercase block">Portfolio / LinkedIn Link (Optional)</label>
+                  <input
+                    type="url"
+                    placeholder="https://drive.google.com/... or https://linkedin.com/in/..."
+                    value={formData.portfolioUrl}
+                    onChange={(e) => setFormData({ ...formData, portfolioUrl: e.target.value })}
+                    className="w-full bg-[#F7F7F5] border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-mono font-bold text-[#171717] uppercase block">Cover Note / Qualifications</label>
                   <textarea
                     rows={3}
-                    placeholder="Briefly introduce your qualifications and experience..."
+                    placeholder="Briefly introduce your qualifications, software skills (AutoCAD, Revit, Staad.Pro), and relevant experience..."
                     value={formData.coverNote}
                     onChange={(e) => setFormData({ ...formData, coverNote: e.target.value })}
                     className="w-full bg-[#F7F7F5] border border-[#E8E8E5] rounded-xl px-4 py-2.5 text-xs text-[#171717] focus:outline-none focus:border-[#171717]"
@@ -658,23 +716,25 @@ export default function CareersClient({ initialCareers = [] }: CareersClientProp
                 </div>
 
                 <div className="p-3 bg-[#F7F7F5] rounded-xl border border-[#E8E8E5] text-[11px] font-mono text-[#6B6B6B]">
-                  Submitting will open your mail client addressed to <strong>{selectedJob.application_email || siteSettings.email}</strong>. Remember to attach your PDF Resume.
+                  Your application will be directly forwarded to the Korals Design talent review desk.
                 </div>
 
                 <div className="pt-2 flex items-center justify-end gap-3">
                   <button
                     type="button"
                     onClick={() => setSelectedJob(null)}
-                    className="px-5 py-2.5 rounded-full border border-[#E8E8E5] text-xs font-mono font-bold uppercase text-[#6B6B6B]"
+                    disabled={submitting}
+                    className="px-5 py-2.5 rounded-full border border-[#E8E8E5] text-xs font-mono font-bold uppercase text-[#6B6B6B] hover:bg-black/5"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-7 py-2.5 bg-[#171717] text-white rounded-full text-xs font-mono font-bold uppercase flex items-center gap-2 hover:bg-[#2A2A28] transition-all shadow-md"
+                    disabled={submitting}
+                    className="px-7 py-2.5 bg-[#171717] text-white rounded-full text-xs font-mono font-bold uppercase flex items-center gap-2 hover:bg-[#2A2A28] transition-all shadow-md disabled:opacity-50"
                   >
                     <Send className="w-3.5 h-3.5" />
-                    <span>Proceed to Email Application</span>
+                    <span>{submitting ? "Submitting..." : "Submit Application"}</span>
                   </button>
                 </div>
               </form>

@@ -5,7 +5,23 @@ import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Play, Pause, ChevronDown } from "lucide-react";
 
-export default function Hero() {
+interface HeroProps {
+  content?: Record<string, string>;
+}
+
+export default function Hero({ content = {} }: HeroProps) {
+  const eyebrow = content.eyebrow || "ARCHITECTURE • CIVIL ENGINEERING • PROJECT CONSULTANCY";
+  const title = content.hero_title || "DESIGNING SPACES.";
+  const highlightedText = content.hero_highlighted_text || "ENGINEERING POSSIBILITIES.";
+  const subtitle = content.hero_subtitle || "Explore opportunities and project solutions that bring architectural design, structural engineering, and statutory project requirements together.";
+  const primaryCtaText = content.hero_primary_cta_text || "EXPLORE PROJECTS";
+  const primaryCtaLink = content.hero_primary_cta_link || "/projects";
+  const secondaryCtaText = content.hero_secondary_cta_text || "START A PROJECT";
+  const secondaryCtaLink = content.hero_secondary_cta_link || "/contact";
+  const heroImage = content.hero_image || "/images/hero_villa_render.jpg";
+  const heroAlt = content.hero_image_alt || "KORALS DESIGN Architectural Visualization";
+  const isVisible = content.hero_visible !== "0";
+
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
@@ -66,6 +82,8 @@ export default function Hero() {
     }
   };
 
+  if (!isVisible) return null;
+
   return (
     <section id="hero-section" className="relative min-h-[95vh] md:min-h-screen flex items-center justify-center pt-32 pb-24 md:pt-40 md:pb-32 overflow-hidden bg-[#181818] text-white">
       
@@ -83,7 +101,7 @@ export default function Hero() {
           loop
           playsInline
           preload="metadata"
-          poster="/images/hero_villa_render.jpg"
+          poster={heroImage}
           key={isMobile ? "mobile-video" : "desktop-video"}
           className="w-full h-full object-cover object-center transition-opacity duration-1000"
         >
@@ -92,8 +110,8 @@ export default function Hero() {
             type="video/mp4"
           />
           <Image
-            src="/images/hero_villa_render.jpg"
-            alt="KORALS DESIGN Architectural Visualization"
+            src={heroImage}
+            alt={heroAlt}
             fill
             className="object-cover"
             priority
@@ -134,39 +152,39 @@ export default function Hero() {
 
         {/* Practice Positioning Subtitle */}
         <span className="text-xs sm:text-sm font-mono tracking-[0.25em] uppercase text-white/70 block mb-6">
-          ARCHITECTURE • CIVIL ENGINEERING • PROJECT CONSULTANCY
+          {eyebrow}
         </span>
 
         {/* Main Editorial Headline */}
         <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[88px] font-extrabold text-white tracking-tighter leading-[1.02] max-w-5xl mb-8 drop-shadow-md uppercase">
-          DESIGNING SPACES.<br />
+          {title}<br />
           <span className="font-serif italic font-normal text-white/90 lowercase text-4xl sm:text-6xl md:text-7xl lg:text-[88px] pr-2">engineering</span>
-          <span className="font-extrabold tracking-tighter text-white">POSSIBILITIES.</span>
+          <span className="font-extrabold tracking-tighter text-white">{highlightedText}</span>
         </h1>
 
         {/* Supporting Copy */}
         <p className="text-base sm:text-lg md:text-xl text-white/80 max-w-2xl font-normal leading-relaxed mb-10 drop-shadow-xs">
-          Explore opportunities and project solutions that bring architectural design, structural engineering, and statutory project requirements together.
+          {subtitle}
         </p>
 
-        {/* CTA Action Buttons (Soft-Corner Studio Design) */}
+        {/* CTA Action Buttons */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mb-16 w-full sm:w-auto">
           
           {/* Primary CTA */}
           <Link
-            href="/projects"
+            href={primaryCtaLink}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-3 text-xs font-mono font-bold uppercase tracking-wider bg-white text-[#171717] px-8 py-4 rounded-xl hover:bg-[#F0F0ED] border border-white/40 transition-all duration-200 shadow-xl cursor-pointer group"
           >
-            <span>EXPLORE PROJECTS</span>
+            <span>{primaryCtaText}</span>
             <ArrowRight className="w-4 h-4 text-[#171717] group-hover:translate-x-1.5 transition-transform duration-200" />
           </Link>
 
           {/* Secondary CTA */}
           <Link
-            href="/services"
+            href={secondaryCtaLink}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-mono font-bold uppercase tracking-wider bg-white/10 backdrop-blur-md text-white border border-white/25 px-8 py-4 rounded-xl hover:bg-white/20 hover:border-white/40 transition-all duration-200 shadow-md cursor-pointer"
           >
-            <span>OUR SERVICES</span>
+            <span>{secondaryCtaText}</span>
           </Link>
 
         </div>

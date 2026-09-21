@@ -175,6 +175,8 @@ export default function ContactClient() {
           name: formData.name.trim(),
           email: formData.email.trim(),
           phone: formData.phone.trim(),
+          company: formData.company.trim(),
+          project_type: formData.enquiryType,
           subject: formData.enquiryType,
           message: fullMessage,
         }),

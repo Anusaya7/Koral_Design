@@ -4,17 +4,21 @@ import { useState } from "react";
 import Image from "next/image";
 import { MapPin, Phone, Mail, ExternalLink, Navigation } from "lucide-react";
 
-export default function LocationExperience() {
+interface LocationExperienceProps {
+  settings?: Record<string, string>;
+}
+
+export default function LocationExperience({ settings = {} }: LocationExperienceProps) {
   const [activeProjectPin, setActiveProjectPin] = useState<string | null>("alfa");
 
   const siteSettings = {
-    company_name: "KORALS DESIGN PVT LTD",
-    legal_name: "Korals Design Private Limited",
-    address: "201, Laxmi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030",
-    phone: "+020 - 24324648",
-    mobile: "+91 9822864648",
-    email: "projects@koralsdesign.com",
-    google_maps_url: "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9?g_st=ac",
+    company_name: settings.company_name || "KORALS DESIGN PVT LTD",
+    legal_name: settings.company_legal_name || "Korals Design Private Limited",
+    address: settings.address || "201, Laxmi Narayan, CTS No. 256B/5, Parvati, Pune, India - 411030",
+    phone: settings.phone || "+020 - 24324648",
+    mobile: settings.mobile || "+91 9822864648",
+    email: settings.email || "projects@koralsdesign.com",
+    google_maps_url: settings.google_maps_url || "https://maps.app.goo.gl/CtsjULVzCDCBq1Qk9?g_st=ac",
   };
 
   const projectNodes = [
@@ -23,18 +27,21 @@ export default function LocationExperience() {
       name: "ALFA LAVAL INDIA LTD",
       location: "Kasarwadi, Bhosari, Pune",
       type: "Industrial Building (12,274 Sq.M.)",
+      image: "/images/alfa_laval_facility.png",
     },
     {
       id: "shrirampur",
       name: "SHRIRAMPUR MUNICIPAL CORP",
       location: "Shrirampur, Maharashtra",
       type: "Institutional Masterplan & Survey",
+      image: "/images/shrirampur_municipal.jpg",
     },
     {
       id: "suzlon",
       name: "SUZLON ENERGY FACILITY",
       location: "Pune, Maharashtra",
       type: "Green Energy Campus Planning",
+      image: "/images/suzlon_energy_facility.png",
     },
   ];
 
@@ -154,7 +161,7 @@ export default function LocationExperience() {
           <div className="lg:col-span-7 relative min-h-[440px] bg-[#181818] overflow-hidden flex items-center justify-center group">
             {/* Background Graphic Image with Grid Overlay */}
             <Image
-              src="/images/architecture_exterior_1.jpg"
+              src={projectNodes.find((p) => p.id === activeProjectPin)?.image || "/images/alfa_laval_facility.png"}
               alt="Korals Design Headquarters Site Graphic"
               fill
               className="object-cover brightness-[0.5] scale-[1.02] group-hover:scale-105 transition-transform duration-700"

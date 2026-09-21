@@ -3,6 +3,8 @@ import Footer from "@/components/Footer";
 import CareersClient from "@/components/CareersClient";
 import db from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Careers | KORALS DESIGN PVT LTD — Open Engineering & Architectural Positions",
   description:

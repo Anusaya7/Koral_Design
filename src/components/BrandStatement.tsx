@@ -3,7 +3,19 @@
 import Link from "next/link";
 import { ArrowRight, Compass, ShieldCheck, Layers } from "lucide-react";
 
-export default function BrandStatement() {
+interface BrandStatementProps {
+  content?: Record<string, string>;
+}
+
+export default function BrandStatement({ content = {} }: BrandStatementProps) {
+  const sectionLabel = content.practice_section_label || "KD / 01 — PRACTICE STATEMENT";
+  const heading = content.practice_heading || "WE DESIGN. WE ENGINEER. WE COORDINATE.";
+  const philosophy = content.practice_philosophy || "Korals Design Private Limited brings an integrated approach combining architectural planning, civil engineering project management, ground survey consultancy, and technical liaison with government departments across Maharashtra.";
+  const description = content.practice_description || "Established with land surveying roots in 2005 and incorporated as Korals Design Private Limited in 2020, we manage complex industrial manufacturing facilities, corporate headquarters, commercial developments, and municipal civil infrastructure from concept through statutory clearances and site handover.";
+  const archText = content.practice_architecture_text || "Master Planning & Design";
+  const engText = content.practice_engineering_text || "PMC & Site Supervision";
+  const coordText = content.practice_coordination_text || "Statutory Department Liaison";
+
   return (
     <section id="brand-statement" className="py-24 md:py-36 bg-[#FFFFFF] border-b border-[#E8E8E5] relative overflow-hidden">
       {/* Background Blueprint Lines */}
@@ -13,7 +25,7 @@ export default function BrandStatement() {
         {/* Section Header Indicator */}
         <div className="flex items-center justify-between border-b border-[#E8E8E5] pb-4 mb-16">
           <span className="text-xs font-mono tracking-widest text-[#171717] font-bold uppercase">
-            KD / 01 — PRACTICE STATEMENT
+            {sectionLabel}
           </span>
           <span className="text-xs font-mono text-[#6B6B6B]">
             PUNE / MAHARASHTRA / INDIA
@@ -30,43 +42,47 @@ export default function BrandStatement() {
             </span>
 
             <h2 className="text-5xl sm:text-7xl lg:text-[84px] font-black text-[#171717] tracking-[-0.04em] leading-[0.95]">
-              WE DESIGN. <br />
-              <span className="text-[#6B6B6B]">WE ENGINEER.</span> <br />
-              <span className="italic font-serif font-normal text-[#171717]">WE COORDINATE.</span>
+              {heading.includes(".") ? (
+                <>
+                  {heading.split(".")[0]}. <br />
+                  <span className="text-[#6B6B6B]">{heading.split(".")[1]?.trim() || "WE ENGINEER"}.</span> <br />
+                  <span className="italic font-serif font-normal text-[#171717]">{heading.split(".")[2]?.trim() || "WE COORDINATE"}.</span>
+                </>
+              ) : (
+                heading
+              )}
             </h2>
 
             <div className="pt-8 grid grid-cols-3 gap-4 text-xs font-mono border-t border-[#E8E8E5] mt-8 text-[#171717]">
               <div className="space-y-1">
                 <Compass className="w-4 h-4 text-[#171717]" />
                 <span className="font-bold block uppercase">ARCHITECTURE</span>
-                <span className="text-[11px] text-[#6B6B6B]">Master Planning &amp; Design</span>
+                <span className="text-[11px] text-[#6B6B6B]">{archText}</span>
               </div>
               <div className="space-y-1">
                 <Layers className="w-4 h-4 text-[#171717]" />
                 <span className="font-bold block uppercase">ENGINEERING</span>
-                <span className="text-[11px] text-[#6B6B6B]">PMC &amp; Site Supervision</span>
+                <span className="text-[11px] text-[#6B6B6B]">{engText}</span>
               </div>
               <div className="space-y-1">
                 <ShieldCheck className="w-4 h-4 text-[#171717]" />
                 <span className="font-bold block uppercase">COORDINATION</span>
-                <span className="text-[11px] text-[#6B6B6B]">Statutory Department Liaison</span>
+                <span className="text-[11px] text-[#6B6B6B]">{coordText}</span>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Verified Narrative & Technical Divider (5 cols) */}
+          {/* Right Column: Narrative (5 cols) */}
           <div className="lg:col-span-5 border-t lg:border-t-0 lg:border-l border-[#E8E8E5] pt-8 lg:pt-0 lg:pl-12 space-y-8 flex flex-col justify-between h-full">
             <div className="space-y-6">
               <span className="inline-block px-3 py-1 rounded-full bg-[#F7F7F5] border border-[#E8E8E5] text-[11px] font-mono text-[#171717] font-semibold">
                 INTEGRATED SINGLE-WINDOW SOLUTION
               </span>
-
               <p className="text-base sm:text-lg text-[#171717] font-medium leading-relaxed">
-                Korals Design Private Limited brings an integrated approach combining architectural planning, civil engineering project management, ground survey consultancy, and technical liaison with government departments across Maharashtra.
+                {philosophy}
               </p>
-
               <p className="text-xs sm:text-sm text-[#6B6B6B] leading-relaxed">
-                Established with land surveying roots in 2005 and incorporated as Korals Design Private Limited in 2020, we manage complex industrial manufacturing facilities, corporate headquarters, commercial developments, and municipal civil infrastructure from concept through statutory clearances and site handover.
+                {description}
               </p>
             </div>
 

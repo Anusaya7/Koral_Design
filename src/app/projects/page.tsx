@@ -3,6 +3,8 @@ import Footer from "@/components/Footer";
 import ProjectsClient from "@/components/ProjectsClient";
 import db from "@/lib/db";
 
+export const dynamic = "force-dynamic";
+
 export const metadata = {
   title: "Projects Portfolio | KORALS DESIGN PVT LTD — Architectural & Engineering Projects",
   description:

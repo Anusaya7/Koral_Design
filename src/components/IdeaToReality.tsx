@@ -3,53 +3,78 @@
 import { useState } from "react";
 import { ArrowRight, Compass, ShieldCheck, Layers, FileText, Factory, CheckCircle2 } from "lucide-react";
 
-export default function IdeaToReality() {
+interface StageItem {
+  id?: number;
+  stage_number: string;
+  stage_code: string;
+  title: string;
+  subtitle: string;
+  description: string;
+  image?: string;
+  display_order?: number;
+  is_active?: number;
+}
+
+interface IdeaToRealityProps {
+  stages?: StageItem[];
+}
+
+const DEFAULT_STEPS = [
+  {
+    num: "01",
+    title: "CONCEPT",
+    subtitle: "Site Analysis & Vision",
+    desc: "Topographic land survey, contour mapping, process flow analysis, and site layout feasibility study.",
+  },
+  {
+    num: "02",
+    title: "DESIGN",
+    subtitle: "Architectural CAD & 3D",
+    desc: "Detailed architectural master planning, structural engineering design, CAD drafting, and 3D spatial walkthroughs.",
+  },
+  {
+    num: "03",
+    title: "DOCUMENTATION",
+    subtitle: "Statutory File Preparation",
+    desc: "Comprehensive technical dossier compilation, statutory NOC checklist, and municipal building drawing preparation.",
+  },
+  {
+    num: "04",
+    title: "APPROVALS",
+    subtitle: "Government Sanctions & Liaison",
+    desc: "Technical department liaison and follow-up support for permissions with MIDC, MPCB, DISH, PMRDA, PMC, PCMC.",
+  },
+  {
+    num: "05",
+    title: "PROJECT MANAGEMENT",
+    subtitle: "PMC & Quality Supervision",
+    desc: "Site supervision, quantity estimation, contractor tendering, milestone tracking, and invoice certification.",
+  },
+  {
+    num: "06",
+    title: "EXECUTION",
+    subtitle: "Facility Handover & As-Built",
+    desc: "Final structural compliance inspection, third-party quality verification, and operational facility handover.",
+  },
+];
+
+const ICONS = [Compass, Layers, FileText, ShieldCheck, Factory, CheckCircle2];
+
+export default function IdeaToReality({ stages = [] }: IdeaToRealityProps) {
   const [activeStep, setActiveStep] = useState(0);
 
-  const steps = [
-    {
-      num: "01",
-      title: "CONCEPT",
-      subtitle: "Site Analysis & Vision",
-      desc: "Topographic land survey, contour mapping, process flow analysis, and site layout feasibility study.",
-      icon: Compass,
-    },
-    {
-      num: "02",
-      title: "DESIGN",
-      subtitle: "Architectural CAD & 3D",
-      desc: "Detailed architectural master planning, structural engineering design, CAD drafting, and 3D spatial walkthroughs.",
-      icon: Layers,
-    },
-    {
-      num: "03",
-      title: "DOCUMENTATION",
-      subtitle: "Statutory File Preparation",
-      desc: "Comprehensive technical dossier compilation, statutory NOC checklist, and municipal building drawing preparation.",
-      icon: FileText,
-    },
-    {
-      num: "04",
-      title: "APPROVALS",
-      subtitle: "Government Sanctions & Liaison",
-      desc: "Technical department liaison and follow-up support for permissions with MIDC, MPCB, DISH, PMRDA, PMC, PCMC.",
-      icon: ShieldCheck,
-    },
-    {
-      num: "05",
-      title: "PROJECT MANAGEMENT",
-      subtitle: "PMC & Quality Supervision",
-      desc: "Site supervision, quantity estimation, contractor tendering, milestone tracking, and invoice certification.",
-      icon: Factory,
-    },
-    {
-      num: "06",
-      title: "EXECUTION",
-      subtitle: "Facility Handover & As-Built",
-      desc: "Final structural compliance inspection, third-party quality verification, and operational facility handover.",
-      icon: CheckCircle2,
-    },
-  ];
+  const steps = stages.length > 0
+    ? stages.map((s, idx) => ({
+        num: s.stage_number || `0${idx + 1}`,
+        title: s.title || s.stage_code,
+        subtitle: s.subtitle,
+        desc: s.description,
+        icon: ICONS[idx % ICONS.length],
+      }))
+    : DEFAULT_STEPS.map((s, idx) => ({
+        ...s,
+        icon: ICONS[idx % ICONS.length],
+      }));
 
   return (
     <section id="idea-to-reality" className="py-24 md:py-36 bg-[#181818] text-white border-b border-[#2A2A28] relative overflow-hidden">

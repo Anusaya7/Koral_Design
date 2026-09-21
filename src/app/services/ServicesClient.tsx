@@ -586,7 +586,7 @@ export default function ServicesClient() {
 
           <div className="bg-white rounded-3xl p-8 border border-[#E8E8E5] shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <div className="lg:col-span-7 relative aspect-[16/10] rounded-2xl overflow-hidden bg-[#181818]">
-              <Image src="/images/architecture_exterior_1.jpg" alt="Alfa Laval Facility" fill className="object-cover" />
+              <Image src="/images/alfa_laval_facility.png" alt="Alfa Laval Facility" fill className="object-cover" />
             </div>
 
             <div className="lg:col-span-5 space-y-4 font-mono">
