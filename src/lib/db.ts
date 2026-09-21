@@ -16,13 +16,26 @@ if (isServerless) {
   dbPath = path.join("/tmp", "korals_cms.db");
   const bundledDbPath = path.join(process.cwd(), "data", "korals_cms.db");
 
+  let shouldCopy = false;
   if (!fs.existsSync(/*turbopackIgnore: true*/ dbPath)) {
-    if (fs.existsSync(bundledDbPath)) {
-      try {
-        fs.copyFileSync(bundledDbPath, dbPath);
-      } catch (err) {
-        console.error("Could not copy bundled db to /tmp:", err);
+    shouldCopy = true;
+  } else if (fs.existsSync(bundledDbPath)) {
+    try {
+      const tmpStat = fs.statSync(/*turbopackIgnore: true*/ dbPath);
+      const bundleStat = fs.statSync(bundledDbPath);
+      if (bundleStat.mtimeMs > tmpStat.mtimeMs || bundleStat.size !== tmpStat.size) {
+        shouldCopy = true;
       }
+    } catch {
+      shouldCopy = true;
+    }
+  }
+
+  if (shouldCopy && fs.existsSync(bundledDbPath)) {
+    try {
+      fs.copyFileSync(bundledDbPath, dbPath);
+    } catch (err) {
+      console.error("Could not copy bundled db to /tmp:", err);
     }
   }
 } else {
@@ -492,6 +505,32 @@ export function initDb() {
     for (const p of initialProjects) {
       insertProj.run(...p);
     }
+  }
+
+  // Ensure project featured and gallery images match the project name precisely
+  try {
+    db.prepare(`
+      UPDATE projects 
+      SET featured_image = '/images/alfa_laval_facility.png',
+          gallery_images = json_array('/images/alfa_laval_facility.png', '/images/architecture_exterior_1.jpg')
+      WHERE UPPER(name) LIKE '%ALFA LAVAL%'
+    `).run();
+
+    db.prepare(`
+      UPDATE projects 
+      SET featured_image = '/images/shrirampur_municipal.jpg',
+          gallery_images = json_array('/images/shrirampur_municipal.jpg', '/images/sketch_elevation_1.jpg')
+      WHERE UPPER(name) LIKE '%SHRIRAMPUR%'
+    `).run();
+
+    db.prepare(`
+      UPDATE projects 
+      SET featured_image = '/images/suzlon_energy_facility.png',
+          gallery_images = json_array('/images/suzlon_energy_facility.png', '/images/interior_lounge_1.jpg')
+      WHERE UPPER(name) LIKE '%SUZLON%'
+    `).run();
+  } catch (err) {
+    console.error("Project image sync error in initDb:", err);
   }
 
   // 8. Seed Real Careers
